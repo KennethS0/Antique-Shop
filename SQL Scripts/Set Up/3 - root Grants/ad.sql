@@ -1,0 +1,1 @@
+GRANT CREATE ON ad.* TO 'ge'@'localhost';
