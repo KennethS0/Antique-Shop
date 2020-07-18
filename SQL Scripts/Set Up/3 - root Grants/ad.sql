@@ -1,1 +1,1 @@
-GRANT CREATE ON ad.* TO 'ge'@'localhost';
+GRANT CREATE ON ad.* TO 'ad'@'localhost';
