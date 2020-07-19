@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS community(
     district_id INT NOT NULL,
     INDEX district_id_ind (district_id),
     FOREIGN KEY(district_id)
-		REFERENCES district(id),
+		REFERENCES district(id)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE,
     
     name VARCHAR(100) NOT NULL
     
