@@ -5,8 +5,10 @@ CREATE TABLE IF NOT EXISTS province(
     country_id INT NOT NULL,
     INDEX country_id_ind (country_id),
     FOREIGN KEY(country_id)
-		REFERENCES country(id),
-    
+		REFERENCES country(id)
+            ON UPDATE CASCADE
+			ON DELETE CASCADE,
+            
     name VARCHAR(100) NOT NULL
     
 ) ENGINE=INNODB

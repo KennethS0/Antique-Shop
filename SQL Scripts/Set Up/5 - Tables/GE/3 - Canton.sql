@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS canton(
     province_id INT NOT NULL,
     INDEX province_id_ind (province_id),
     FOREIGN KEY(province_id)
-		REFERENCES province(id),
+		REFERENCES province(id)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE,
     
     name VARCHAR(100) NOT NULL
     
