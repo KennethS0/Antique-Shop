@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS numberxperson(
-	number_id INT,
-    person_id BIGINT,
+	number_id INT NOT NULL,
+    person_id BIGINT NOT NULL,
     
     
     -- Person id foreign key set up

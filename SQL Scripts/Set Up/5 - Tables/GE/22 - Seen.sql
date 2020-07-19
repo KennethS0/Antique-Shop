@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS seen(
 	product_id INT NOT NULL,
     user_id INT NOT NULL,
-    date_seen DATE,
+    date_seen DATETIME NOT NULL, 
     
     INDEX (date_seen),
     

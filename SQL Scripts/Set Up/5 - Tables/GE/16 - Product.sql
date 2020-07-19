@@ -18,14 +18,14 @@ CREATE TABLE IF NOT EXISTS Product(
         ON DELETE CASCADE,
     
     -- Review foreign key set up 
-    buyerReview_id INT NOT NULL,
+    buyerReview_id INT,
     INDEX buyerReview_id_ind (buyerReview_id),
     FOREIGN KEY(buyerReview_id)
 		REFERENCES review(id)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     
-    sellerReview_id INT NOT NULL,
+    sellerReview_id INT,
     INDEX sellerReview_id_ind (sellerReview_id),
     FOREIGN KEY(sellerReview_id)
 		REFERENCES review(id)
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Product(
         ON DELETE CASCADE,
     
     -- Buyer foreign key set up 
-    buyer_id INT NOT NULL,
+    buyer_id INT,
     INDEX buyer_id_ind (buyer_id),
     FOREIGN KEY(buyer_id)
 		REFERENCES useraccount(id)
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS Product(
     
     productname VARCHAR(100) NOT NULL,
     INDEX productname_ind (productname),
-    state varchar(32) NOT NULL CHECK (state in ('sold', 'available')),	#	Creates constraint that allows only 2 possible states
+    state VARCHAR(32) NOT NULL CHECK (state in ('sold', 'available')),	#	Creates constraint that allows only 2 possible states
     INDEX state_ind (state),
     date_published DATE NOT NULL,
     INDEX date_published_ind (date_published),
