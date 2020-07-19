@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS message(
     reciever_id INT NOT NULL,
     content VARCHAR(300) NOT NULL,
     dateSent DATETIME NOT NULL,
-    id INT NOT NULL,
     
     INDEX dateSent_ind (dateSent),
     
@@ -16,8 +15,7 @@ CREATE TABLE IF NOT EXISTS message(
         REFERENCES useraccount(id),
         
 	CONSTRAINT message_pk
-		PRIMARY KEY (sender_id, reciever_id, id)
-    
+		PRIMARY KEY (sender_id, reciever_id)
     
 ) ENGINE=INNODB
 TABLESPACE=ge_data
