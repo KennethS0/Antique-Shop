@@ -18,9 +18,16 @@ CREATE TABLE IF NOT EXISTS Product(
         ON DELETE CASCADE,
     
     -- Review foreign key set up 
-    review_id INT NOT NULL,
-    INDEX review_id_ind (review_id),
-    FOREIGN KEY(review_id)
+    buyerReview_id INT NOT NULL,
+    INDEX buyerReview_id_ind (buyerReview_id),
+    FOREIGN KEY(buyerReview_id)
+		REFERENCES review(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    
+    sellerReview_id INT NOT NULL,
+    INDEX sellerReview_id_ind (sellerReview_id),
+    FOREIGN KEY(sellerReview_id)
 		REFERENCES review(id)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
