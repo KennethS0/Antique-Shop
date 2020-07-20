@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS province(
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id INT PRIMARY KEY,
     
     -- Country foreign key set up 
     country_id INT NOT NULL,

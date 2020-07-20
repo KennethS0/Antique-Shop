@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS community(
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id INT PRIMARY KEY,
     
     -- District foreign key set up 
     district_id INT NOT NULL,

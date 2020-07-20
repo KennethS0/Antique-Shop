@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS canton(
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id INT PRIMARY KEY,
     
     -- Province foreign key set up 
     province_id INT NOT NULL,
