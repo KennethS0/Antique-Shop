@@ -2,3 +2,8 @@
 # Virtual Enviornment #
 # =================== #
 /[Ee]nv/
+
+# ==================== # 
+# Auto-Generated Files #
+# ==================== #
+.vscode
