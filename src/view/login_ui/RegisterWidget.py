@@ -276,13 +276,3 @@ class Ui_RegisterPage(object):
         self.Register_CommunityLabel_3.setText(_translate("RegisterPage", "Canton"))
         self.Register_CommunityLabel_4.setText(_translate("RegisterPage", "Disctrict"))
         self.Register_CommunityLabel_5.setText(_translate("RegisterPage", "Community"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    RegisterPage = QtWidgets.QWidget()
-    ui = Ui_RegisterPage()
-    ui.setupUi(RegisterPage)
-    RegisterPage.show()
-    sys.exit(app.exec_())

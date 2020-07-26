@@ -1,6 +1,6 @@
 import mysql.connector
-import model.Database.IConstants as I
-import model.User.User as u
+import src.model.Database.IConstants as I
+from ..User import User as u
 
 
 
@@ -95,7 +95,7 @@ class Database:
                                              kwargs['communityId']))
 
             cursor.callproc(I.SIGN_UP_ACCOUNT, (kwargs['citizenId'], 
-                                           kwargs['username'].upper(),
+                                           kwargs['username'],
                                            kwargs['password']))
 
             self.connection.commit()

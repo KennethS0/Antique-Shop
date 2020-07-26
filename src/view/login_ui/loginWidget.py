@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'loginWidget.ui'
+# Form implementation generated from reading ui file 'LoginWidget.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -32,23 +32,6 @@ class Ui_LoginPage(object):
         self.Login_Background.setMaximumSize(QtCore.QSize(1024, 727))
         self.Login_Background.setText("")
         self.Login_Background.setObjectName("Login_Background")
-        self.Login_UsernameInput = QtWidgets.QPlainTextEdit(LoginPage)
-        self.Login_UsernameInput.setGeometry(QtCore.QRect(580, 140, 291, 41))
-        font = QtGui.QFont()
-        font.setFamily("Source Sans Pro")
-        font.setPointSize(14)
-        self.Login_UsernameInput.setFont(font)
-        self.Login_UsernameInput.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.Login_UsernameInput.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.Login_UsernameInput.setObjectName("Login_UsernameInput")
-        self.Login_PasswordInput = QtWidgets.QPlainTextEdit(LoginPage)
-        self.Login_PasswordInput.setGeometry(QtCore.QRect(580, 290, 291, 41))
-        font = QtGui.QFont()
-        font.setFamily("Source Sans Pro")
-        font.setPointSize(14)
-        self.Login_PasswordInput.setFont(font)
-        self.Login_PasswordInput.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.Login_PasswordInput.setObjectName("Login_PasswordInput")
         self.Login_LoginButton = QtWidgets.QPushButton(LoginPage)
         self.Login_LoginButton.setGeometry(QtCore.QRect(580, 450, 141, 41))
         font = QtGui.QFont()
@@ -88,6 +71,23 @@ class Ui_LoginPage(object):
         self.Login_RegisterButton.setFont(font)
         self.Login_RegisterButton.setFlat(False)
         self.Login_RegisterButton.setObjectName("Login_RegisterButton")
+        self.Login_UsernameInput = QtWidgets.QLineEdit(LoginPage)
+        self.Login_UsernameInput.setGeometry(QtCore.QRect(580, 150, 301, 31))
+        font = QtGui.QFont()
+        font.setFamily("Source Sans Pro")
+        font.setPointSize(14)
+        self.Login_UsernameInput.setFont(font)
+        self.Login_UsernameInput.setFrame(False)
+        self.Login_UsernameInput.setObjectName("Login_UsernameInput")
+        self.Login_PasswordInput = QtWidgets.QLineEdit(LoginPage)
+        self.Login_PasswordInput.setGeometry(QtCore.QRect(580, 300, 301, 31))
+        font = QtGui.QFont()
+        font.setFamily("Source Sans Pro")
+        font.setPointSize(14)
+        self.Login_PasswordInput.setFont(font)
+        self.Login_PasswordInput.setFrame(False)
+        self.Login_PasswordInput.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.Login_PasswordInput.setObjectName("Login_PasswordInput")
 
         self.retranslateUi(LoginPage)
         QtCore.QMetaObject.connectSlotsByName(LoginPage)
@@ -100,3 +100,13 @@ class Ui_LoginPage(object):
         self.Login_PasswordLabel.setText(_translate("LoginPage", "Password"))
         self.Login_UsernameLabel.setText(_translate("LoginPage", "Username"))
         self.Login_RegisterButton.setText(_translate("LoginPage", "Register"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    LoginPage = QtWidgets.QWidget()
+    ui = Ui_LoginPage()
+    ui.setupUi(LoginPage)
+    LoginPage.show()
+    sys.exit(app.exec_())
