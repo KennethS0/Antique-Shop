@@ -7,3 +7,4 @@
 # Auto-Generated Files #
 # ==================== #
 .vscode
+__pycache__
