@@ -1,0 +1,1 @@
+INSERT INTO parameter (name) VALUES ('product_search_keyword');

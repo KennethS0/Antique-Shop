@@ -1,0 +1,1 @@
+GRANT INSERT ON ad.parameter TO 'ge'@'localhost';
