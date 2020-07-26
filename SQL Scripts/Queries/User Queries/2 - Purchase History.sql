@@ -2,7 +2,7 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS purchase_history;
 CREATE PROCEDURE purchase_history(IN user_id INT)
 	BEGIN
-		SELECT product.id AS id, product.productname AS product_name, useraccount.user_name AS username, country.name AS country, product.price AS price, product.date_bought AS sale_date
+		SELECT product.id AS id, product.productname AS product_name, acc.user_name AS username, cnt.name AS country, product.price AS price, product.date_bought AS sale_date
 		FROM product 
 			INNER JOIN useraccount AS acc ON product.seller_id = acc.id
             INNER JOIN person AS per ON acc.person_id = per.citizenship_id
