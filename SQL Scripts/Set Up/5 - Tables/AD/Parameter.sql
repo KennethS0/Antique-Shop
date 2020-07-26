@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS parameter (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
-    value VARCHAR(30) NOT NULL
+    value VARCHAR(30)
 )ENGINE=INNODB
 TABLESPACE=ad_data
 COMMENT='This table is used to give the administrators of the DB the
