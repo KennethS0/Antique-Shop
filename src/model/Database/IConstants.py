@@ -28,3 +28,4 @@ REVOKE_ADMIN = 'Admin_RevokeAdmin'
 #########################
 ADD_TO_CART = 'Insertion_AddToCart'
 SELL_PRODUCT = 'Inserton_SellProduct'
+LEAVE_REVIEW = 'Insertion_LeaveReview'
