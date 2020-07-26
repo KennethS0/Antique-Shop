@@ -10,3 +10,21 @@ SIGN_UP_ACCOUNT = 'SignUp_Account'
 #################
 LOGIN = 'LogIn_User'
 IS_ADMIN = 'LogIn_IsAdmin'
+
+################
+# Admin Module #
+################
+GET_USER_DATA = 'Admin_GetUserData'
+MAKE_ADMIN = 'Admin_MakeAdmin'
+REVOKE_ADMIN = 'Admin_RevokeAdmin'
+
+###########
+# Queries #
+###########
+
+
+#########################
+# Data Insertion Module #
+#########################
+ADD_TO_CART = 'Insertion_AddToCart'
+SELL_PRODUCT = 'Inserton_SellProduct'

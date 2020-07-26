@@ -1,5 +1,6 @@
 DELIMITER ;;
 -- Procedure used to insert new people into the database.
+DROP PROCEDURE IF EXISTS SignUp_Person;
 CREATE PROCEDURE SignUp_Person(IN pCitizenshipId BIGINT,
 							  IN pFirst_name VARCHAR(20),
                               IN pMiddle_name VARCHAR(20),
@@ -13,11 +14,11 @@ CREATE PROCEDURE SignUp_Person(IN pCitizenshipId BIGINT,
                               
 	BEGIN
 		-- Duplicate data handler
-		DECLARE duplicate_id CONDITION FOR SQLSTATE '45000';
+		DECLARE duplicate_data CONDITION FOR SQLSTATE '45000';
         DECLARE EXIT HANDLER FOR 1062
         BEGIN
 			SIGNAL SQLSTATE VALUE '45000'
-            SET MESSAGE_TEXT = 'Do not insert duplicate ID\'s.';
+            SET MESSAGE_TEXT = 'Do not insert duplicate ID\'s, or try another E-Mail.';
         END;
         
         -- Data Insertion
@@ -42,18 +43,17 @@ CREATE PROCEDURE SignUp_Person(IN pCitizenshipId BIGINT,
              gender_id,
              nationality_id,
              community_id);
-		
-        COMMIT;
    END;;
 
 -- Procedure used to insert new users into table
 -- useraccount
+DROP PROCEDURE IF EXISTS SignUp_Account;
 CREATE PROCEDURE SignUp_Account (IN pPerson_id BIGINT, 
 							 IN pUser_name VARCHAR(20), 
                              IN pPassword VARCHAR(200))
 	BEGIN
 		-- Duplicate data handler
-		DECLARE duplicate_id CONDITION FOR SQLSTATE '45001';
+		DECLARE duplicate_data CONDITION FOR SQLSTATE '45001';
         DECLARE EXIT HANDLER FOR 1062
         BEGIN
 			SIGNAL SQLSTATE VALUE '45000'
@@ -64,5 +64,4 @@ CREATE PROCEDURE SignUp_Account (IN pPerson_id BIGINT,
         INSERT INTO useraccount(person_id, user_name, password)
 		VALUES
 			(pPerson_id, pUser_name, MD5(pPassword));
-        COMMIT;
    END;;

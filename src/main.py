@@ -9,20 +9,21 @@ if __name__ == '__main__':
     cursor = db.connection.cursor()
 
     try:
-        # db.signUp(citizenId=117870936,
+        # db.signUp(citizenId=1178709336,
         #            firstName='KENNETH',
         #            secondName= '',
         #            lastName= 'SANCHEZ',
         #            secondLastName='OCAMPO',
-        #            email='kenneth.sanchez0906',
+        #            email='kenneth.sanzchez0906',
         #            date=datetime.now().date(),  
         #            genderId=2,
         #            nationalityId=44,
         #            communityId=1010106,
-        #            username='kenneths0',
+        #            username='kenneths01',
         #            password='Passwordxd')
 
         db.logIn('KennethS0', 'Passwordxd')
+        db.revokeAdmin('KennethS01')
 
         
 

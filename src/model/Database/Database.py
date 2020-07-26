@@ -2,18 +2,22 @@ import mysql.connector
 import model.Database.IConstants as I
 import model.User.User as u
 
-'''
+
+
+class Database:
+    '''
     Database class (SINGLETON):
         This class is responsible for all connections,
         queries and data manipulation  
-'''
-
-class Database:
+    '''
 
     instance = None
 
     @staticmethod
     def getInstance():
+        '''
+        Gets the only instance of the database allowed
+        '''
         if Database.instance == None:
             return Database()
         return Database.instance
@@ -29,7 +33,7 @@ class Database:
             Database.instace = self
 
 
-    def connect(self, pUser, pPassword, pHost, pDatabase):
+    def connect(self, pUser, pPassword, pHost, pDatabase) -> None:
         '''
         Connects to the specified database
         '''
@@ -42,19 +46,37 @@ class Database:
             print('Error occured')
 
 
-    def disconnect(self):
+    def disconnect(self) -> None:
         '''
             Closes the database connection.
         '''
         self.connection.close()
 
 
-    def query(self, **kwargs):
-        # pPermission, pType, pInstruction, parameters=[], returnType=None, getRows=False
-        pass
+    def query(self, instruction='', parameters=()) -> list:
+        '''
+            Retrieves data from a specific query.
+        '''
+        try:
+            data = []
+
+            cursor = self.connection.cursor()
+
+            cursor.callproc(instruction, parameters)
+
+            for results in cursor.stored_results():
+                data += results.fetchall()
+
+            return data
+
+        except Exception as err:
+            print(err)
+
+        finally:
+            cursor.close()
 
 
-    def signUp(self, **kwargs):
+    def signUp(self, **kwargs) -> None:
         '''
         Signs up the person and user to the database.
         '''
@@ -72,9 +94,11 @@ class Database:
                                              kwargs['nationalityId'], 
                                              kwargs['communityId']))
 
-            cursor.callproc(I.SIGN_UP_PERSON, (kwargs['citizenId'], 
+            cursor.callproc(I.SIGN_UP_ACCOUNT, (kwargs['citizenId'], 
                                            kwargs['username'].upper(),
                                            kwargs['password']))
+
+            self.connection.commit()
 
         except Exception as err:
             print(err)
@@ -83,7 +107,7 @@ class Database:
             cursor.close()
 
 
-    def logIn(self, pUsername, pPassword):
+    def logIn(self, pUsername, pPassword) -> None:
         '''
             Logs in the user, saving its information
             in a User instance.
@@ -112,6 +136,63 @@ class Database:
             else:
                 raise Exception('Incorrect username or password.')
 
+        except Exception as err:
+            print(err)
+
+        finally:
+            cursor.close()
+
+
+    def makeAdmin(self, pUsername) -> None:
+        '''
+        Makes another user an administrator    
+        '''
+        if not self.connectedUser.isAdmin:
+            raise Exception('The connected user is not an admin.')
+
+        else:
+            try:
+                userData = self.query(instruction='Admin_GetUserData', parameters=(pUsername,))
+
+                cursor = self.connection.cursor()
+
+                cursor.callproc(I.MAKE_ADMIN, (userData[0][0],))
+
+            except Exception as err:
+                print(err)
+
+            finally:
+                cursor.close()
+
+
+    def revokeAdmin(self, pUsername) -> None:
+        '''
+        Makes another user an administrator    
+        '''
+        if not self.connectedUser.isAdmin:
+            raise Exception('The connected user is not an admin.')
+
+        else:
+            try:
+                userData = self.query(instruction='Admin_GetUserData', parameters=(pUsername,))
+
+                cursor = self.connection.cursor()
+
+                cursor.callproc(I.REVOKE_ADMIN, (userData[0][0],))
+
+            except Exception as err:
+                print(err)
+
+            finally:
+                cursor.close()
+
+
+    def insertData(self, instruction='', parameters=()) -> None:
+        try:
+            cursor = self.connection.cursor()
+
+            cursor.callproc(instruction, parameters)
+            
         except Exception as err:
             print(err)
 
