@@ -1,5 +1,6 @@
 import mysql.connector
 import model.Database.IConstants
+import model.User.User as u
 
 '''
     Database class (SINGLETON):
@@ -52,6 +53,7 @@ class Database:
         # pPermission, pType, pInstruction, parameters=[], returnType=None, getRows=False
         pass
 
+
     def signUp(self, **kwargs):
         '''
         Signs up the person and user to the database.
@@ -76,15 +78,45 @@ class Database:
 
         except Exception as err:
             print(err)
+        
+        finally:
+            cursor.close()
+
 
     def logIn(self, pUsername, pPassword):
+        '''
+            Logs in the user, saving its information
+            in a User instance.
+        '''
         try:
             cursor = self.connection.cursor()
 
+            cursor.callproc('LogIn_User', (pUsername, pPassword))
 
+            userData = []
+
+            # Saves the data
+            for results in cursor.stored_results():
+                userData += results.fetchall()
+
+            # Creates the user if one was found
+            if userData:
+                self.connectedUser = u.User(userData[0][1], userData[0][0])
+                
+                cursor.callproc('LogIn_IsAdmin', (userData[0][0],))
+                
+                # Sets the admin state in the user
+                for isAdmin in cursor.stored_results():
+                    self.connectedUser.isAdmin = isAdmin.fetchall()[0][0]
+
+            else:
+                raise Exception('Incorrect username or password.')
 
         except Exception as err:
             print(err)
+
+        finally:
+            cursor.close()
 
 
 

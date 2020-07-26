@@ -22,10 +22,9 @@ if __name__ == '__main__':
         #            username='kenneths0',
         #            password='Passwordxd')
 
-        cursor.callproc('LogIn_User', ('KENNETHS0', 'Passwordxd'))
+        db.logIn('KennethS0', 'Passwordxd')
 
-        for i in cursor:
-            print(i)
+        
 
     except Exception as err:
         print(err)           

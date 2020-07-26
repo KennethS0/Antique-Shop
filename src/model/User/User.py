@@ -16,3 +16,4 @@ class User:
         '''
         self.username = pUsername
         self.id = pId
+        self.isAdmin = False
