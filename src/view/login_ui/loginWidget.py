@@ -100,13 +100,3 @@ class Ui_LoginPage(object):
         self.Login_PasswordLabel.setText(_translate("LoginPage", "Password"))
         self.Login_UsernameLabel.setText(_translate("LoginPage", "Username"))
         self.Login_RegisterButton.setText(_translate("LoginPage", "Register"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    LoginPage = QtWidgets.QWidget()
-    ui = Ui_LoginPage()
-    ui.setupUi(LoginPage)
-    LoginPage.show()
-    sys.exit(app.exec_())
