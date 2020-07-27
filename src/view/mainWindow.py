@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
 
-from Ui_MainWindow import *
+from .Ui_MainWindow import *
 
 class MainWindow:
     def __init__(self):
@@ -13,7 +13,7 @@ class MainWindow:
         self.ui.MainWindow_PageGroup.setCurrentWidget(self.ui.LoginPage)
 
         self.ui.Login_RegisterButton.clicked.connect(self.showRegister)
-        self.ui.Login_LoginButton.clicked.connect(self.showUserMenu)#User info or Admin
+        
 
 
         self.ui.Register_RegisterButton.clicked.connect(self.showLogin)

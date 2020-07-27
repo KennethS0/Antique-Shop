@@ -1,6 +1,8 @@
 from src.Controller.LogInController import LoginController
-from src.view.App import MainWindow
+from src.view.mainWindow import MainWindow
 from src.model.Database import Database as dbm
+from PyQt5 import QtWidgets
+import sys
 
 if __name__ == '__main__':
     # try:
@@ -22,5 +24,16 @@ if __name__ == '__main__':
 
     # except Exception as err:
     #     print(err)           
+    app = QtWidgets.QApplication(sys.argv)
+
+    view = MainWindow()
+
     model = dbm.Database.getInstance()
-    LoginController(model)
+    model.connect('ge', 'ge', 'localhost', 'ge')
+    loginController = LoginController(view, model)
+    registerController = RegisterController(view, model)
+
+
+    view.show()
+
+    app.exec_()

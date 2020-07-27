@@ -1,36 +1,29 @@
-from ..view.App import MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from ..model.Database import Database as dbm
 
 class LoginController:
 
-    def __init__(self, pModel):
-        app = QtWidgets.QApplication(sys.argv)
-
-        self.view = MainWindow()
-        self.model = pModel
-        self.model.connect('ge', 'ge', 'localhost', 'ge') 
+    def __init__(self, pView, pModel):
+        self.view = pView
+        self.model = pModel 
 
         # Adds the events to each button
-        self.view.loadedUi.Login_LoginButton.clicked.connect(self.login)
-        self.view.loadedUi.Login_CancelButton.clicked.connect(self.cancelLogin)
-        
-        # Shows the application
-        self.view.show()
-
-        app.exec_()
-
+        self.view.ui.Login_LoginButton.clicked.connect(self.login)#User info or Admin
+        self.view.ui.Login_CancelButton.clicked.connect(self.cancelLogin)
     
+
     def login(self):
         '''
             Logs in a user and changes the window.
         '''
         try:
-            username = self.view.loadedUi.Login_UsernameInput.text().strip()
-            password = self.view.loadedUi.Login_PasswordInput.text().strip()
+            username = self.view.ui.Login_UsernameInput.text().strip()
+            password = self.view.ui.Login_PasswordInput.text().strip()
             
             self.model.login(username, password)
+
+            self.view.showUserMenu()
         except:
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('Invalid credentials.')
@@ -39,9 +32,16 @@ class LoginController:
 
             msg.exec_()
 
+
     def cancelLogin(self):
         '''
             Clears data in the filled spaces.
         '''
-        self.view.loadedUi.Login_PasswordInput.clear()
-        self.view.loadedUi.Login_UsernameInput.clear()
+        self.view.ui.Login_PasswordInput.clear()
+        self.view.ui.Login_UsernameInput.clear()
+
+
+    def loadRegister(self):
+        '''
+            
+        '''
