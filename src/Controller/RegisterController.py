@@ -8,8 +8,9 @@ class RegisterController:
         self.model = pModel
 
         # Sets the events
-        self.view.ui.Re
+        self.view.ui.Register_RegisterButton.clicked.connect(self.registerNewUser)
 
 
     def registerNewUser(self):
-        pass
+        print('aqui')
+        # self.ui.Register_RegisterButton.clicked.connect(self.showLogin)

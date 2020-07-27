@@ -1,4 +1,5 @@
 from src.Controller.LogInController import LoginController
+from src.Controller.RegisterController import RegisterController
 from src.view.mainWindow import MainWindow
 from src.model.Database import Database as dbm
 from PyQt5 import QtWidgets
@@ -35,7 +36,7 @@ if __name__ == '__main__':
     model.connect('ge', 'ge', 'localhost', 'ge')
 
     loginController = LoginController(view, model)
-    # registerController = RegisterController(view, model)
+    registerController = RegisterController(view, model)
 
 
     view.show()

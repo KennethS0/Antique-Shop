@@ -16,7 +16,6 @@ class MainWindow:
         
 
         
-        self.ui.Register_RegisterButton.clicked.connect(self.showLogin)
         self.ui.Register_CancelButton.clicked.connect(self.showLogin)
 
 

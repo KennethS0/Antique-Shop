@@ -11,7 +11,8 @@ class LoginController:
 
         # Adds the events to each button
         self.view.ui.Login_LoginButton.clicked.connect(self.login) # User info or Admin
-        # self.view.ui.Login_CancelButton.clicked.connect(self.cancelLogin)
+        self.view.ui.Login_CancelButton.clicked.connect(self.cancelLogin)
+
 
     def login(self):
         '''
@@ -25,7 +26,7 @@ class LoginController:
             self.cancelLogin()
             
             self.view.showUserMenu()
-        except Exception as err:
+        except:
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('Invalid credentials.')
