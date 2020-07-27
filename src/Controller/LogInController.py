@@ -22,15 +22,18 @@ class LoginController:
             username = self.view.ui.Login_UsernameInput.text().strip()
             password = self.view.ui.Login_PasswordInput.text().strip()
             
+            if not username or not password:
+                raise Exception('Make sure all spaces are filled out.')
+
             self.model.logIn(username, password)
             self.cancelLogin()
             
             self.view.showUserMenu()
-        except:
+        except Exception as err:
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('Invalid credentials.')
-            msg.setText('Incorrect username or password!')
+            msg.setText(str(err))
             msg.setIcon(QtWidgets.QMessageBox.Critical)
 
             msg.exec_()
