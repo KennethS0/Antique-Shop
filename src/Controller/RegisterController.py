@@ -63,6 +63,7 @@ class RegisterController:
                                    I.GET_COMMUNITIES,
                                    self.communities))
 
+        # self.view.ui.Register_
 
     def loadData(self, pClearCombos, pParentBox, pChildBox, pArray, pInstruction, pSave):
         '''
