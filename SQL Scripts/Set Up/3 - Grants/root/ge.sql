@@ -3,8 +3,6 @@ GRANT ALTER, SELECT, INSERT ON  ge.* TO 'ge'@'localhost';
 GRANT REFERENCES ON  ge.* TO 'ge'@'localhost';
 GRANT DROP ON ge.* TO 'ge'@'localhost';
 GRANT TRIGGER ON ad.* TO 'ad'@'localhost';
-GRANT CREATE ROUTINE, ALTER ROUTINE on ge.* TO 'ge'@'localhost';
-GRANT UPDATE ON ge.* TO 'ge'@'localhost';
-GRANT DELETE ON ge.* TO 'ge'@'localhost';
-
-SET GLOBAL log_bin_trust_function_creators = 1;
+GRANT ALTER ROUTINE, CREATE ROUTINE, EXECUTE ON ge.* TO 'ge'@'localhost' ; 
+GRANT SELECT ON ge.* TO 'ad'@'localhost';
+GRANT EVENT ON ge.* TO 'ge'@'localhost';

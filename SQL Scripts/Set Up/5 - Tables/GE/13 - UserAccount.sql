@@ -18,3 +18,6 @@ CREATE TABLE IF NOT EXISTS useraccount(
 TABLESPACE=ge_data
 COMMENT = 'Table used to store information regarding a specific user (username, password, id, and the
 respective person)';
+
+ALTER TABLE useraccount 
+CHANGE COLUMN password password VARCHAR(200) CHARACTER SET 'utf8mb4' NOT NULL ;
