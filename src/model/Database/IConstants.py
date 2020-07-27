@@ -18,6 +18,15 @@ GET_USER_DATA = 'Admin_GetUserData'
 MAKE_ADMIN = 'Admin_MakeAdmin'
 REVOKE_ADMIN = 'Admin_RevokeAdmin'
 
+####################
+# Geography Module #
+####################
+GET_COUNTRIES = 'Geography_getCountries'
+GET_PROVINCES = 'Geography_getProvinces'
+GET_CANTONS = 'Geography_getCantons'
+GET_DISTRICTS = 'Geography_getDistricts'
+GET_COMMUNITIES = 'Geography_getCommunities'
+
 ###########
 # Queries #
 ###########

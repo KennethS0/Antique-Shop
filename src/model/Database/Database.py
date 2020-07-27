@@ -128,7 +128,7 @@ class Database:
             # Sets the admin state in the user
 
             cursor.close()
-            
+
             for isAdmin in cursor.stored_results():
                 self.connectedUser.isAdmin = isAdmin.fetchall()[0][0]
         else:

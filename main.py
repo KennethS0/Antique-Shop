@@ -38,7 +38,6 @@ if __name__ == '__main__':
     loginController = LoginController(view, model)
     registerController = RegisterController(view, model)
 
-
     view.show()
 
     app.exec_()

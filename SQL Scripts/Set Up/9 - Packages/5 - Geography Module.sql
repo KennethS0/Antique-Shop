@@ -1,16 +1,44 @@
 DELIMITER ;;
--- Lets a user leave a review of how the interaction was with
--- the other user during the transaction.
-DROP PROCEDURE IF EXISTS Insertion_LeaveReview;
-CREATE PROCEDURE Insertion_LeaveReview (pDescription TEXT,
-										pNumStars FLOAT,
-										pUser_Reviewed_id INT)
+-- Gets every country in the system
+DROP PROCEDURE IF EXISTS Geography_getCountries;
+CREATE PROCEDURE Geography_getCountries ()
 BEGIN
-	INSERT INTO review (description,
-						num_starts,
-                        user_reviewed_id)
-	VALUES
-		(pDescription,
-         pNumStars,
-         pUse_Reviewed_id);
+	SELECT id, name FROM country;
+END;;
+
+DELIMITER ;;
+-- Gets every province in the system from a specific country
+DROP PROCEDURE IF EXISTS Geography_getProvinces;
+CREATE PROCEDURE Geography_getProvinces (pCountryId INT)
+BEGIN
+	SELECT id, name FROM province
+		WHERE country_id = pCountryId;
+END;;
+
+DELIMITER ;;
+-- Gets every canton in the system from a specific province
+DROP PROCEDURE IF EXISTS Geography_getCantons;
+CREATE PROCEDURE Geography_getCantons (pProvinceId INT)
+BEGIN
+	SELECT id, name FROM canton
+		WHERE province_id = pProvinceId;
+END;;
+
+DELIMITER ;;
+-- Gets every canton in the system from a specific province
+DROP PROCEDURE IF EXISTS Geography_getDistricts;
+CREATE PROCEDURE Geography_getDistricts (pCantonId INT)
+BEGIN
+	SELECT id, name FROM district
+		WHERE canton_id = pCantonId;
+END;;
+
+
+DELIMITER ;;
+-- Gets every canton in the system from a specific province
+DROP PROCEDURE IF EXISTS Geography_getCommunities;
+CREATE PROCEDURE Geography_getCommunities (pDistrictId INT)
+BEGIN
+	SELECT id, name FROM community
+		WHERE district_id = pDistrictId;
 END;;
