@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from LoginWidget import Ui_LoginPage
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -34,12 +36,15 @@ class Ui_MainWindow(object):
         self.MainWindow_PageGroup.setGeometry(QtCore.QRect(0, 0, 1024, 727))
         self.MainWindow_PageGroup.setFrameShape(QtWidgets.QFrame.Box)
         self.MainWindow_PageGroup.setObjectName("MainWindow_PageGroup")
+        ##########################################
         self.LoginPage = QtWidgets.QWidget()
         self.LoginPage.setObjectName("LoginPage")
         self.MainWindow_PageGroup.addWidget(self.LoginPage)
+        ##########################################
         self.UserMenuPage = QtWidgets.QWidget()
         self.UserMenuPage.setObjectName("UserMenuPage")
         self.MainWindow_PageGroup.addWidget(self.UserMenuPage)
+        
         self.AdminMenuPage = QtWidgets.QWidget()
         self.AdminMenuPage.setObjectName("AdminMenuPage")
         self.MainWindow_PageGroup.addWidget(self.AdminMenuPage)
