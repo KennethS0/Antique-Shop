@@ -112,35 +112,27 @@ class Database:
             Logs in the user, saving its information
             in a User instance.
         '''
-        try:
-            cursor = self.connection.cursor()
+        cursor = self.connection.cursor()
+        cursor.callproc(I.LOGIN, (pUsername, pPassword))
+        
+        userData = []
+        # Saves the data
+        for results in cursor.stored_results():
+            userData += results.fetchall()
+        
+        # Creates the user if one was found
+        if userData:
+            self.connectedUser = u.User(userData[0][1], userData[0][0])
+            
+            cursor.callproc(I.IS_ADMIN, (userData[0][0],))
+            # Sets the admin state in the user
 
-            cursor.callproc(I.LOGIN, (pUsername, pPassword))
-
-            userData = []
-
-            # Saves the data
-            for results in cursor.stored_results():
-                userData += results.fetchall()
-
-            # Creates the user if one was found
-            if userData:
-                self.connectedUser = u.User(userData[0][1], userData[0][0])
-                
-                cursor.callproc(I.IS_ADMIN, (userData[0][0],))
-                
-                # Sets the admin state in the user
-                for isAdmin in cursor.stored_results():
-                    self.connectedUser.isAdmin = isAdmin.fetchall()[0][0]
-
-            else:
-                raise Exception('Incorrect username or password.')
-
-        except Exception as err:
-            print(err)
-
-        finally:
             cursor.close()
+            
+            for isAdmin in cursor.stored_results():
+                self.connectedUser.isAdmin = isAdmin.fetchall()[0][0]
+        else:
+            raise Exception('Incorrect username or password.')
 
 
     def makeAdmin(self, pUsername) -> None:
