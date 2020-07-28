@@ -32,7 +32,8 @@ GET_AREACODE = 'Geography_getAreaCode'
 ###########
 # Queries #
 ###########
-
+GET_CATEGORIES = 'Product_getCategories'
+PRODUCT_SEARCH = 'product_search'
 
 #########################
 # Data Insertion Module #
@@ -40,3 +41,8 @@ GET_AREACODE = 'Geography_getAreaCode'
 ADD_TO_CART = 'Insertion_AddToCart'
 SELL_PRODUCT = 'Inserton_SellProduct'
 LEAVE_REVIEW = 'Insertion_LeaveReview'
+
+####################
+# PARAMETER MODULE #
+####################
+SET_CATEGORY = 'set_categoryParam'

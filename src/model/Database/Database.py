@@ -52,6 +52,11 @@ class Database:
         '''
         self.connection.close()
 
+    def commit(self):
+        try:
+            cursor = self.connection.commit()
+        except Exception as err:
+            print(err)
 
     def query(self, instruction='', parameters=()) -> list:
         '''

@@ -1,5 +1,6 @@
 from src.Controller.LogInController import LoginController
 from src.Controller.RegisterController import RegisterController
+from src.Controller.SearchController import SearchController
 from src.view.mainWindow import MainWindow
 from src.model.Database import Database as dbm
 from PyQt5 import QtWidgets
@@ -16,7 +17,7 @@ if __name__ == '__main__':
     # except Exception as err:
     #     print(err)
     # 
-              
+           
     app = QtWidgets.QApplication(sys.argv)
 
     view = MainWindow()
@@ -24,9 +25,23 @@ if __name__ == '__main__':
     model = dbm.Database.getInstance()
     model.connect('ge', 'ge', 'localhost', 'ge')
 
+    #model.signUp(citizenId=1178709336,
+    #                firstName='KENNETH',
+    #                secondName= '',
+    #                lastName= 'SANCHEZ',
+    #                secondLastName='OCAMPO',
+    #                email='kenneth.sanzchez0906',
+    #                date=datetime.now().date(),  
+    #                genderId=2,
+    #                nationalityId=44,
+    #                communityId=1010106,
+    #                username='kenneths01',
+    #                password='Passwordxd')
+
     loginController = LoginController(view, model)
     registerController = RegisterController(view, model)
+    searchController = SearchController(view, model)
 
     view.show()
-
-    sys.exit(app.exec_())
+    
+    app.exec_()
