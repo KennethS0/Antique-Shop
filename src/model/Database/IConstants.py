@@ -45,4 +45,6 @@ LEAVE_REVIEW = 'Insertion_LeaveReview'
 ####################
 # PARAMETER MODULE #
 ####################
-SET_CATEGORY = 'set_categoryParam'
+SET_CATEGORY_PARAM = 'set_categoryParam'
+SET_PRICE_PARAM = 'set_priceParam'
+SET_KEYWORD_PARAM = 'set_keywordParam'

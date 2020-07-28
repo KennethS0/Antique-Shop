@@ -33,23 +33,29 @@ class SearchController:
 
         self.view.ui.Search_SearchButton.clicked.connect(self.searchProduct)
 
-
     def searchProduct(self):
         try:
+            # GET PARAMETERS FROM INPUT
             category = str(self.view.ui.Search_CategoryInput.currentText())
-
             if category == 'ANY':
                 category = ''
+            price = str(self.view.ui.Search_PriceInput.currentText())
+            keyword = self.view.ui.Search_ProducNametInput.text().strip()
         
-            print("SEARCHING PRODUCT... CATEGORY: " + category)
+            print("SEARCHING PRODUCT... CATEGORY: " + category + ", PRICE: " + price + ", KEYWORD: " + keyword)
 
-            self.model.query(I.SET_CATEGORY, [category])
+            self.model.query(I.SET_CATEGORY_PARAM, [category])
+            self.model.query(I.SET_PRICE_PARAM, [price])
+            self.model.query(I.SET_KEYWORD_PARAM, [keyword])
             self.model.commit()
+
+            # EXECUTES SEARCH PRODUCT QUERY
+            products = self.model.query(I.PRODUCT_SEARCH)
+            print(products)
             
         except:
             self.showError('ERROR', 'Fatal error')
             return
-  
 
 
 
