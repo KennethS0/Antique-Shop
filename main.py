@@ -40,4 +40,4 @@ if __name__ == '__main__':
 
     view.show()
 
-    app.exec_()
+    sys.exit(app.exec_())

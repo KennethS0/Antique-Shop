@@ -26,6 +26,8 @@ GET_PROVINCES = 'Geography_getProvinces'
 GET_CANTONS = 'Geography_getCantons'
 GET_DISTRICTS = 'Geography_getDistricts'
 GET_COMMUNITIES = 'Geography_getCommunities'
+GET_NATIONALITIES = 'Geography_getNationalities'
+GET_AREACODE = 'Geography_getAreaCode'
 
 ###########
 # Queries #

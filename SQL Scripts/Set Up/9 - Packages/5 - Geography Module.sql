@@ -42,3 +42,20 @@ BEGIN
 	SELECT id, name FROM community
 		WHERE district_id = pDistrictId;
 END;;
+
+DELIMITER ;;
+-- Gets every nationality available.
+DROP PROCEDURE IF EXISTS Geography_getNationalities;
+CREATE PROCEDURE Geography_getNationalities ()
+BEGIN
+	SELECT id, name FROM nationality;
+END;;
+
+DELIMITER ;;
+-- Gets the phone number code of a certain country
+DROP PROCEDURE IF EXISTS Geography_getAreaCode;
+CREATE PROCEDURE Geography_getAreaCode (pCountryId INT)
+BEGIN
+	SELECT id, areacode FROM areacode
+		WHERE country_id = pCountryId;
+END;;
