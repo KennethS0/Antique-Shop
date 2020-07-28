@@ -1,5 +1,7 @@
 from ..model.Database import IConstants as I
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import QDate, QDateTime
+from datetime import date
 import re
 
 class RegisterController:
@@ -110,21 +112,25 @@ class RegisterController:
         self.areacode = countryCode
 
         if self.areacode:
-            print(self.areacode)
             self.view.ui.Register_PhoneAreaInput.setText(str(self.areacode[0][1]))
 
 
-
     def registerNewUser(self):
+        # Id Validation
         id = self.view.ui.Register_IDInput.text()
-        
-        # Number validation
+        if len(id) != 10:
+            self.showError('Invalid ID', 'Invalid ID (Only numbers are accepted)')
+            return
+
+        # Id validation
         try:
             id = int(id)
         except:
             self.view.ui.Register_IDInput.clear()
             self.showError('Invalid ID', 'Invalid ID (Only numbers are accepted)')
             return
+
+        # Phone number validation
 
         # Email validation
         regex = '^[a-z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$'
@@ -135,8 +141,41 @@ class RegisterController:
             self.showError('Invalid Email', 'Please type a valid email address.')
             return
 
+        # Date verification
+        birthDate = self.view.ui.Register_BirthDateInput.date().toPyDate()
+        if birthDate > date.today() or 100 < abs((birthDate.year- date.today().year)):
+            self.showError('Invalid Birthdate', 'Enter a valid date.')
+            return
+
+        # Password validation
+        regex = '^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$' # One upper, one lower, 8 length
+        password = self.view.ui.Register_PasswordInput.text().strip()
+        confirmed = self.view.ui.Register_PasswordInput_2.text().strip()
+
+        if  not ((password == confirmed) and re.search(regex, password)):
+            print(password, confirmed)
+            self.view.ui.Register_PasswordInput.clear()
+            self.view.ui.Register_PasswordInput_2.clear()
+            self.showError('Invalid Password', 'Invalid password, please try again.')
+            return
+        
         
 
+        if name and registerLastName and userName:
+            model.signUp(citizenId=int(id),
+                   firstName='KENNETH',
+                   secondName= '',
+                   lastName= 'SANCHEZ',
+                   secondLastName='OCAMPO',
+                   email='kenneth.sanzchez0906',
+                   date=datetime.now().date(),  
+                   genderId=2,
+                   nationalityId=44,
+                   communityId=1010106,
+                   username=userName,
+                   password=password) 
+        else:
+            self.showError('Fill all input fields.', 'You missed something.')
 
     def showError(self, pTitle, pMessage):
         '''
