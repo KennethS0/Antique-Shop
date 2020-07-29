@@ -42,7 +42,7 @@ if __name__ == '__main__':
     loginController = LoginController(view, model)
     registerController = RegisterController(view, model)
     searchController = SearchController(view, model)
-    sellingController = SellingController(view, model)
+    # sellingController = SellingController(view, model)
 
     view.show()
     
