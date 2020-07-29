@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Picture(
 	id INT AUTO_INCREMENT PRIMARY KEY,
-    picture BLOB NOT NULL,
+    picture VARCHAR(64),
     
     -- Product foreign key set up 
     product_id INT NOT NULL,
