@@ -30,7 +30,7 @@ class LoginController:
             self.cancelLogin()
             
             self.view.showUserMenu()
-            sellingController = SellingController(self.view, self.model)
+
         except Exception as err:
 
             msg = QtWidgets.QMessageBox()

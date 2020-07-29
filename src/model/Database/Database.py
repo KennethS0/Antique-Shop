@@ -97,12 +97,14 @@ class Database:
                                              kwargs['date'],
                                              kwargs['genderId'],
                                              kwargs['nationalityId'], 
-                                             kwargs['communityId'],
-                                             kwargs['username'],
-                                             kwargs['password'],
-                                             kwargs['phonenumber'],
-                                             kwargs['phonetype'],
-                                             kwargs['areacode']))
+                                             kwargs['communityId']))
+
+            cursor.callproc(I.SIGN_UP_ACCOUNT, (kwargs['citizenId'], 
+                                           kwargs['username'],
+                                           kwargs['password']))
+
+            self.connection.commit()
+
         except Exception as err:
             print(err)
         
@@ -193,3 +195,4 @@ class Database:
 
         finally:
             cursor.close()
+
