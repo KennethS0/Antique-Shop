@@ -33,7 +33,6 @@ class MainWindow:
         self.ui.UserMenu_CartButton.clicked.connect(self.showCart)
         self.ui.UserMenu_Username.clicked.connect(self.showUserEdit)
         self.ui.UserEdit_ApplyButton.clicked.connect(self.showSearch)
-        self.ui.Selling_RegisterProductButton.clicked.connect(self.showProductRegister)
         self.ui.UserMenu_LogoutButton.clicked.connect(self.showLogin)
 
 
@@ -92,8 +91,7 @@ class MainWindow:
     def showUserEdit(self):
         self.ui.UserMenu_WidgetGroup.setCurrentWidget(self.ui.UserEditPage)
 
-    def showProductRegister(self):
-        self.ui.UserMenu_WidgetGroup.setCurrentWidget(self.ui.ProductRegisterPage)
+
 
 
 
