@@ -1,6 +1,7 @@
 from ..model.Database import IConstants as I
 from PyQt5 import QtWidgets
 import re
+from datetime import date
 
 class RegisterController:
     '''
@@ -24,14 +25,21 @@ class RegisterController:
         self.cantons = []
         self.districts = []
         self.communities = []
+        self.phoneTypes = self.model.query(I.GET_PHONE_TYPES)
+        self.genders = self.model.query(I.GET_GENDERS)
 
-        
         # Loads initial data
         for country in self.countries:
             self.view.ui.Register_CountryInput.addItem(country[1])
 
         for nationality in self.nationalities:
             self.view.ui.Register_NationalityInput.addItem(nationality[1])
+
+        for phoneType in self.phoneTypes:
+            self.view.ui.Register_PhoneTypeInput.addItem(phoneType[1])
+
+        for gender in self.genders:
+            self.view.ui.Register_GenderInput.addItem(gender[1])
 
         # Setting events
         self.view.ui.Register_CountryInput.activated.connect(
@@ -116,27 +124,96 @@ class RegisterController:
 
 
     def registerNewUser(self):
-        id = self.view.ui.Register_IDInput.text()
-        
-        # Number validation
-        try:
-            id = int(id)
-        except:
-            self.view.ui.Register_IDInput.clear()
-            self.showError('Invalid ID', 'Invalid ID (Only numbers are accepted)')
-            return
+        try: 
+            id = self.view.ui.Register_IDInput.text()
 
-        # Email validation
-        regex = '^[a-z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$'
-        email = self.view.ui.Register_EmailInput.text()
+            # Number validation
+            if len(id) != 10:
+                self.view.ui.Register_IDInput.clear()
+                self.showError('Invalid ID', 'Please put a valid id (10 digits long)')
+                return
+            
+            try:
+                id = int(id)
+            except:
+                self.view.ui.Register_IDInput.clear()
+                self.showError('Invalid ID', 'Invalid ID (Only numbers are accepted)')
+                return
 
-        if not re.search(regex, email):
-            self.view.ui.Register_EmailInput.clear()
-            self.showError('Invalid Email', 'Please type a valid email address.')
-            return
+            # Email validation
+            regex = '^[a-z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$'
+            email = self.view.ui.Register_EmailInput.text()
 
-        
+            if not re.search(regex, email):
+                self.view.ui.Register_EmailInput.clear()
+                self.showError('Invalid Email', 'Please type a valid email address.')
+                return
 
+            # Date verification
+            birthDate = self.view.ui.Register_BirthDateInput.date().toPyDate()
+            if birthDate > date.today() or 100 < abs((birthDate.year- date.today().year)):
+                self.showError('Invalid Birthdate', 'Enter a valid date.')
+                return
+
+            # Password validation
+            regex = '^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$' # One upper, one lower, 8 length
+            password = self.view.ui.Register_PasswordInput.text().strip()
+            confirmed = self.view.ui.Register_ConfirmPasswordInput.text().strip()
+
+            if  not ((password == confirmed) and re.search(regex, password)):
+                print(password, confirmed)
+                self.view.ui.Register_PasswordInput.clear()
+                self.view.ui.Register_ConfirmPasswordInput.clear()
+                self.showError('Invalid Password', 'Invalid password, please try again.')
+                return
+
+            # Phone Number validation
+            phone = self.view.ui.Register_PhoneInput.text()
+
+            if len(phone) != 8:
+                self.showError('Invalid Number', 'Please enter a valid phone number')
+                return
+
+            try:
+                phone = int(phone)
+            except:
+                self.view.ui.Register_IDInput.clear()
+                self.showError('Invalid ID', 'Invalid ID (Only numbers are accepted)')
+                return
+
+            # Usernames
+            usernameInput = self.view.ui.Register_UsernameInput.text()
+
+            # firstNameIn = self.view.ui.
+            # secondNameIn = self.view.ui.
+            # lastNameIn = self.view.ui
+            # secondLastNameIn = self.view.ui
+
+            if not usernameInput or not firstNameIn or not secondNameIn or not lastNameIn or not secondLastNameIn:
+                self.showError('Empty fields detected', 'Please fill every single field.')
+                return
+            elif len(usernameInput) < 5:
+                self.showError('Username is too short', 'Try a longer username')
+                
+            # Obtaining information
+
+
+            
+            # Insertion of person and useraccount
+            self.model.signUp(citizenId=int(id),
+                       firstName=firstNameIn,
+                       secondName=secondNameIn,
+                       lastName=lastNameIn,
+                       secondLastName=secondLastNameIn,
+                       email=email,
+                       date=birthDate,  
+                       genderId=2,
+                       nationalityId=44,
+                       communityId=1010106,
+                       username=usernameInput,
+                       password=password)
+        except Exception as err:
+            print(err)
 
     def showError(self, pTitle, pMessage):
         '''
