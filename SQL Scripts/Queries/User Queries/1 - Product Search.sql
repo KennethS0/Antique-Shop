@@ -9,7 +9,7 @@ CREATE PROCEDURE product_search()
             INNER JOIN ad.parameter AS par_price ON par_price.name = "price"
             INNER JOIN productcategory AS cat ON category_id = cat.id
 		WHERE UPPER(productname) LIKE UPPER(CONCAT('%',par_keyword.value,'%')) 
-			AND cat.name = par_category.value
+			AND cat.name LIKE CONCAT('%',par_category.value,'%')
 			AND price <= CAST(par_price.value AS UNSIGNED)
             ;
 	END;;

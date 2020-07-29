@@ -1,5 +1,6 @@
+import sys
 from ..model.Database import IConstants as I
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 import re
 
 class SearchController:
@@ -7,10 +8,11 @@ class SearchController:
         Connects the login view to the model.
     '''
     def __init__(self, pView, pModel):
-        print("e")
+        
         self.view = pView
         self.model = pModel 
         
+        print("e")
         # Data gathering
         self.categories = self.model.query(I.GET_CATEGORIES)
         
@@ -31,12 +33,16 @@ class SearchController:
         self.view.ui.Search_PriceInput.addItem('ANY')
         self.view.ui.Search_PriceInput.setCurrentIndex(6)
 
+        self.view.ui.Search_TableProductInput.setColumnCount(4)
+
         self.view.ui.Search_SearchButton.clicked.connect(self.searchProduct)
 
-        self.view.ui.Search_TableProductInput.setColumnCount(4)
-        self.view.ui.Search_TableProductInput.setHorizontalHeaderLabels(['ID', 'Product', 'Price', 'Category'])
+        
+        
 
     def searchProduct(self):
+        self.view.ui.Search_TableProductInput.clear()
+        self.view.ui.Search_TableProductInput.setHorizontalHeaderLabels(['ID', 'Product', 'Price', 'Category'])
         try:
             # GET PARAMETERS FROM INPUT
             category = str(self.view.ui.Search_CategoryInput.currentText())
@@ -60,12 +66,18 @@ class SearchController:
             else:
                 self.view.ui.Search_TableProductInput.setRowCount(len(products))
 
-            
+                print(products[0])
+                
+                #item = QtWidgets.QTableWidgetItem("e")
+                
+                for i in range(len(products)):
+                    for j in range(4):
+                        item = QtWidgets.QTableWidgetItem(str(products[i][j]))
+                        self.view.ui.Search_TableProductInput.setItem(i,j,item)
             
         except:
             self.showError('ERROR', 'Fatal error')
             return
-
 
 
         
