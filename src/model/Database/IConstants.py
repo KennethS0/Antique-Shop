@@ -4,6 +4,7 @@
 SIGN_UP_PERSON = 'SignUp_Person'
 SIGN_UP_ACCOUNT = 'SignUp_Account'
 
+
 #################
 # LOG IN MODULE #
 #################
@@ -31,7 +32,6 @@ GET_AREACODE = 'Geography_getAreaCode'
 ###########
 # Queries #
 ###########
-GET_CATEGORIES = 'Product_getCategories'
 PRODUCT_SEARCH = 'product_search'
 
 #########################
@@ -47,6 +47,13 @@ LEAVE_REVIEW = 'Insertion_LeaveReview'
 SET_CATEGORY_PARAM = 'set_categoryParam'
 SET_PRICE_PARAM = 'set_priceParam'
 SET_KEYWORD_PARAM = 'set_keywordParam'
+
+##################
+# PRODUCT MODULE #
+##################
+GET_MERCHANDISE = 'Product_getMerchandise'
+GET_CATEGORIES = 'Product_getCategories'
+GET_SHIPMENTS = 'Product_getShipments'
 
 ###############################
 # Personal Information Module #

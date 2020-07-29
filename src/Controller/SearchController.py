@@ -12,8 +12,7 @@ class SearchController:
         
         self.view = pView
         self.model = pModel 
-        
-        print("e")
+
         # Data gathering
         self.categories = self.model.query(I.GET_CATEGORIES)
         
@@ -39,9 +38,7 @@ class SearchController:
         self.view.ui.Search_TableProductInput.cellDoubleClicked.connect(self.selectProduct)
         
         #self.view.ui.Search_TableProductInput.viewport().installEventFilter(self.view)
-        self.view.ui.Search_SearchButton.clicked.connect(self.searchProduct)
-
-           
+        self.view.ui.Search_SearchButton.clicked.connect(self.searchProduct)           
 
     def searchProduct(self):
         self.view.ui.Search_TableProductInput.clear()
@@ -85,3 +82,4 @@ class SearchController:
 
     def selectProduct(self, row, column):
         print("SELECTED PRODUCT ID " + self.view.ui.Search_TableProductInput.item(row, 0).text())
+        

@@ -15,7 +15,6 @@ CREATE PROCEDURE Insertion_SellProduct (pCategoryId INT,
 										pShipmentId INT,
                                         pSellerId INT,
                                         pProductname VARCHAR(100),
-										pDatePublished DATE,
                                         pPrice FLOAT,
                                         pDescription TEXT)
 BEGIN
@@ -33,7 +32,7 @@ BEGIN
          pSellerId,
          pProductname,
          'available',
-         pDatePublished,
+         CURDATE(),
          pPrice,
          pDescription);
 END;;
