@@ -2,6 +2,7 @@ from src.Controller.LogInController import LoginController
 from src.Controller.RegisterController import RegisterController
 from src.Controller.SearchController import SearchController
 from src.Controller.SellingController import SellingController
+from src.Controller.ProductviewController import ProductviewController
 from src.view.mainWindow import MainWindow
 from src.model.Database import Database as dbm
 from PyQt5 import QtWidgets
@@ -42,7 +43,8 @@ if __name__ == '__main__':
     loginController = LoginController(view, model)
     registerController = RegisterController(view, model)
     searchController = SearchController(view, model)
-    # sellingController = SellingController(view, model)
+    sellingController = SellingController(view, model)
+    productviewController = ProductviewController(view, model)
 
     view.show()
     

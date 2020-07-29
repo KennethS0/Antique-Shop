@@ -22,3 +22,14 @@ BEGIN
 	SELECT id, name FROM shipment;
 END;;
 
+-- Get information about a product based on ID
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS Product_getProduct;
+CREATE PROCEDURE Product_getProduct (pID INT)
+BEGIN
+	SELECT product.id, productname, shipment_id, acc.user_name, price, pic.picture, description
+    FROM product
+		INNER JOIN useraccount AS acc ON seller_id = acc.id
+        INNER JOIN picture AS pic ON  product.id = pic.product_id
+	WHERE product.id = pID;
+END;;
