@@ -9,8 +9,9 @@ CREATE PROCEDURE product_search()
             INNER JOIN ad.parameter AS par_price ON par_price.name = "price"
             INNER JOIN productcategory AS cat ON category_id = cat.id
 		WHERE UPPER(productname) LIKE UPPER(CONCAT('%',par_keyword.value,'%')) 
-			AND CAST(category_id AS CHAR(32)) = par_category.value
-			AND price <= CAST(par_price.value AS UNSIGNED);
+			AND cat.name = par_category.value
+			AND price <= CAST(par_price.value AS UNSIGNED)
+            ;
 	END;;
 -- Procedure to search products based on a match between their name and a string stored on the parameters table.
 -- Both strings are converted to uppercase so the search is case insensitive.

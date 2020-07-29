@@ -9,3 +9,5 @@ INSERT INTO productcategory (name)
         ('CLOCKS'),
         ('CLOTHES'),
         ('SHOES');
+        
+INSERT INTO productcategory (name) VALUES ('PAINTING');

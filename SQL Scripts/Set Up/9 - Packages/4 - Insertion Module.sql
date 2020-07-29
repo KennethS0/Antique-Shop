@@ -9,7 +9,7 @@ BEGIN
 END;;
 
 DELIMITER ;;
--- Adds a product to the cart of a user.
+-- Adds a product to the store
 DROP PROCEDURE IF EXISTS Insertion_SellProduct;
 CREATE PROCEDURE Insertion_SellProduct (pCategoryId INT,
 										pShipmentId INT,
@@ -23,14 +23,16 @@ BEGIN
 						 shipment_id,
                          seller_id,
                          productname,
+                         state,
                          date_published,
                          price,
                          description)
 	VALUES
-		(pCatergoryId,
+		(pCategoryId,
          pShipmentId,
          pSellerId,
          pProductname,
+         'available',
          pDatePublished,
          pPrice,
          pDescription);

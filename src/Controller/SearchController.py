@@ -33,6 +33,9 @@ class SearchController:
 
         self.view.ui.Search_SearchButton.clicked.connect(self.searchProduct)
 
+        self.view.ui.Search_TableProductInput.setColumnCount(4)
+        self.view.ui.Search_TableProductInput.setHorizontalHeaderLabels(['ID', 'Product', 'Price', 'Category'])
+
     def searchProduct(self):
         try:
             # GET PARAMETERS FROM INPUT
@@ -51,7 +54,13 @@ class SearchController:
 
             # EXECUTES SEARCH PRODUCT QUERY
             products = self.model.query(I.PRODUCT_SEARCH)
-            print(products)
+
+            if products == []:
+                print('No products match the search parameters!')
+            else:
+                self.view.ui.Search_TableProductInput.setRowCount(len(products))
+
+            
             
         except:
             self.showError('ERROR', 'Fatal error')
