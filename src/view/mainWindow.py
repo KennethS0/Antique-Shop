@@ -13,10 +13,6 @@ class MainWindow:
         self.ui.MainWindow_PageGroup.setCurrentWidget(self.ui.LoginPage)
 
         self.ui.Login_RegisterButton.clicked.connect(self.showRegister)
-        
-
-        
-        self.ui.Register_CancelButton.clicked.connect(self.showLogin)
 
 
 

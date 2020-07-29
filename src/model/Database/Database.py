@@ -195,3 +195,4 @@ class Database:
 
         finally:
             cursor.close()
+

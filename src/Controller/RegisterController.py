@@ -85,6 +85,7 @@ class RegisterController:
 
         self.view.ui.Register_RegisterButton.clicked.connect(self.registerNewUser)
 
+        self.view.ui.Register_CancelButton.clicked.connect(self.clearAll)
 
     def loadData(self, pClearCombos, pParentBox, pChildBox, pArray, pInstruction, pSave):
         '''
@@ -118,7 +119,6 @@ class RegisterController:
         self.areacode = countryCode
 
         if self.areacode:
-            print(self.areacode)
             self.view.ui.Register_PhoneAreaInput.setText(str(self.areacode[0][1]))
 
 
@@ -128,7 +128,7 @@ class RegisterController:
             id = self.view.ui.Register_IDInput.text()
 
             # Number validation
-            if len(id) != 10:
+            if len(id) != 9:
                 self.view.ui.Register_IDInput.clear()
                 self.showError('Invalid ID', 'Please put a valid id (10 digits long)')
                 return
@@ -161,14 +161,13 @@ class RegisterController:
             confirmed = self.view.ui.Register_ConfirmPasswordInput.text().strip()
 
             if  not ((password == confirmed) and re.search(regex, password)):
-                print(password, confirmed)
                 self.view.ui.Register_PasswordInput.clear()
                 self.view.ui.Register_ConfirmPasswordInput.clear()
                 self.showError('Invalid Password', 'Invalid password, please try again.')
                 return
 
             # Phone Number validation
-            phone = self.view.ui.Register_PhoneInput.text()
+            phone = self.view.ui.Register_PhoneInput.text().strip()
 
             if len(phone) != 8:
                 self.showError('Invalid Number', 'Please enter a valid phone number')
@@ -182,23 +181,53 @@ class RegisterController:
                 return
 
             # Usernames
-            usernameInput = self.view.ui.Register_UsernameInput.text()
+            usernameInput = self.view.ui.Register_UsernameInput.text().strip()
 
-            # firstNameIn = self.view.ui.
-            # secondNameIn = self.view.ui.
-            # lastNameIn = self.view.ui
-            # secondLastNameIn = self.view.ui
+            firstNameIn = self.view.ui.Register_FirstnameInput.text().strip()
+            secondNameIn = self.view.ui.Register_SecondnameInput.text().strip()
+            lastNameIn = self.view.ui.Register_LastnameInput.text().strip()
+            secondLastNameIn = self.view.ui.Register_SecondlastnameInput.text().strip()
 
-            if not usernameInput or not firstNameIn or not secondNameIn or not lastNameIn or not secondLastNameIn:
-                self.showError('Empty fields detected', 'Please fill every single field.')
+            # Name validation 
+            if re.search(r'\d', firstNameIn) or re.search(r'\d', secondNameIn) or re.search(r'\d', lastNameIn) or re.search(r'\d', secondLastNameIn):
+                self.showError('Invalid Name', 'Names cant have numbers.')
+                return
+
+            if not usernameInput or not firstNameIn or not lastNameIn:
+                self.showError('Empty fields detected', 'Make sure you have a username, a first name and a last name')
                 return
             elif len(usernameInput) < 5:
                 self.showError('Username is too short', 'Try a longer username')
-                
-            # Obtaining information
+
+            # Checks if number exists and if it is a mobile number (has to be unique)
+            countryName = self.view.ui.Register_CountryInput.currentText()
+            provinceName = self.view.ui.Register_ProvinceInput.currentText()
+            cantonName = self.view.ui.Register_CantonInput.currentText()
+            districtName = self.view.ui.Register_DistrictInput.currentText()
+            communityName = self.view.ui.Register_CommunityInput.currentText()
+            communityId = self.model.query(I.GET_COMMUNITY_ID, (countryName,
+                                                                provinceName,
+                                                                cantonName,
+                                                                districtName,
+                                                                communityName))
+
+            nationalityName = self.view.ui.Register_NationalityInput.currentText()
+            nationalityId = self.model.query(I.GET_NATIONALITY_ID, (nationalityName, ))
+
+            genderName = self.view.ui.Register_GenderInput.currentText()
+            genderId = self.model.query(I.GET_GENDER_ID, (genderName,))
+
+            phoneTypeName = self.view.ui.Register_PhoneTypeInput.currentText()
+            phoneTypeId = self.model.query(I.GET_PHONE_TYPE_ID, (phoneTypeName, ))
 
 
-            
+
+            if self.view.ui.Register_PhoneTypeInput.currentText().upper() == 'MOBILE':
+                unique = self.model.query(I.CHECK_UNIQUE_MOBILE, (self.areacode[0][0], phone))
+                if unique:
+                    self.showError('Phone already registered.', 'Try with another phone number.')
+                    return
+                    
             # Insertion of person and useraccount
             self.model.signUp(citizenId=int(id),
                        firstName=firstNameIn,
@@ -207,11 +236,21 @@ class RegisterController:
                        secondLastName=secondLastNameIn,
                        email=email,
                        date=birthDate,  
-                       genderId=2,
-                       nationalityId=44,
-                       communityId=1010106,
+                       genderId=genderId[0][0],
+                       nationalityId=nationalityId[0][0],
+                       communityId=communityId[0][0],
                        username=usernameInput,
-                       password=password)
+                       password=password,
+                       phonenumber=phone,
+                       phonetype=phoneTypeId[0][0],
+                       areacode=self.areacode[0][0])
+
+            # Clears all the information that was inside
+            self.clearAll()
+
+            # Changes view to login
+            self.view.showLogin()
+
         except Exception as err:
             print(err)
 
@@ -224,3 +263,19 @@ class RegisterController:
         msg.setText(pMessage)
         msg.setIcon(QtWidgets.QMessageBox.Critical)
         msg.exec_()
+
+
+    def clearAll(self):
+        '''
+            Clears all the information that was given as input
+        '''
+        self.view.ui.Register_IDInput.clear()
+        self.view.ui.Register_EmailInput.clear()
+        self.view.ui.Register_PhoneInput.clear()
+        self.view.ui.Register_FirstnameInput.clear()
+        self.view.ui.Register_SecondnameInput.clear()
+        self.view.ui.Register_LastnameInput.clear()
+        self.view.ui.Register_SecondlastnameInput.clear()
+        self.view.ui.Register_UsernameInput.clear()
+        self.view.ui.Register_PasswordInput.clear()
+        self.view.ui.Register_ConfirmPasswordInput.clear()

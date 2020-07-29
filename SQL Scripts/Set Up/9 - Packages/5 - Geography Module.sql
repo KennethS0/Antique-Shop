@@ -59,3 +59,32 @@ BEGIN
 	SELECT id, areacode FROM areacode
 		WHERE country_id = pCountryId;
 END;;
+
+DELIMITER ;;
+-- Obtains the ID of the community
+DROP PROCEDURE IF EXISTS Geography_getCommunityId;
+CREATE PROCEDURE Geography_getCommunityId (pCountry VARCHAR(100),
+										   pProvince VARCHAR(100),
+                                           pCanton VARCHAR(100),
+                                           pDistrict VARCHAR(100),
+                                           pCom VARCHAR(100))
+BEGIN
+	SELECT com.id FROM community AS com
+		INNER JOIN district AS dis
+        ON dis.id = com.district_id
+        
+        INNER JOIN canton AS can
+        ON can.id = dis.canton_id
+        
+        INNER JOIN province AS pro
+        ON pro.id = can.province_id
+        
+        INNER JOIN country AS con
+        ON con.id = pro.country_id
+        
+        WHERE com.name = pCom AND dis.name = pDistrict AND
+			  can.name = pCanton AND pro.name = pProvince AND
+              con.name = pCountry;
+END;;
+
+CALL checkUniqueMobile(3, 71106941);

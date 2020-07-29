@@ -15,9 +15,9 @@ CREATE PROCEDURE Insertion_SellProduct (pCategoryId INT,
 										pShipmentId INT,
                                         pSellerId INT,
                                         pProductname VARCHAR(100),
-										pDatePublished DATE,
                                         pPrice FLOAT,
-                                        pDescription TEXT)
+                                        pDescription TEXT,
+                                        pPicture VARCHAR(64))
 BEGIN
 	INSERT INTO product (category_id,
 						 shipment_id,
@@ -33,10 +33,13 @@ BEGIN
          pSellerId,
          pProductname,
          'available',
-         pDatePublished,
+         CURDATE(),
          pPrice,
          pDescription);
+	INSERT INTO picture (picture, product_id)
+	VALUES (pPicture, LAST_INSERT_ID());
 END;;
+
 
 DELIMITER ;;
 -- Lets a user leave a review of how the interaction was with
@@ -54,3 +57,30 @@ BEGIN
          pNumStars,
          pUse_Reviewed_id);
 END;;
+
+DELIMITER ;; 
+-- Adds a phone number and connects it to a person
+DROP PROCEDURE IF EXISTS Insertion_PhoneNumber;;
+CREATE PROCEDURE Insertion_PhoneNumber (pNumber INT, pType INT, pCodeId INT)
+BEGIN
+	INSERT INTO phonenumber (number, areacode_id, type_id)
+		VALUES (pNumber, pCodeId, pType);
+END;;
+
+DELIMITER ;;
+-- Connects the person to a number
+DROP PROCEDURE IF EXISTS Insertion_ConnectPhone;;
+CREATE PROCEDURE Insertion_ConnectPhone (pPersonId INT)
+BEGIN
+	INSERT INTO numberxperson (number_id, person_id)
+		VALUES (pPersonId, (SELECT LAST_INSERT_ID()));
+END;;
+DELIMITER ;;
+-- Inserts picture path
+DROP PROCEDURE IF EXISTS Product_insertPicture;
+CREATE PROCEDURE Product_insertPicture (pPicture VARCHAR(64), pProductID INT)
+BEGIN
+	INSERT INTO picture (picture, product_id) 
+		VALUES (pPicture, pProductID);
+END;;
+
