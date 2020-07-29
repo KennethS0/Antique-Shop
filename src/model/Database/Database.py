@@ -97,14 +97,12 @@ class Database:
                                              kwargs['date'],
                                              kwargs['genderId'],
                                              kwargs['nationalityId'], 
-                                             kwargs['communityId']))
-
-            cursor.callproc(I.SIGN_UP_ACCOUNT, (kwargs['citizenId'], 
-                                           kwargs['username'],
-                                           kwargs['password']))
-
-            self.connection.commit()
-
+                                             kwargs['communityId'],
+                                             kwargs['username'],
+                                             kwargs['password'],
+                                             kwargs['phonenumber'],
+                                             kwargs['phonetype'],
+                                             kwargs['areacode']))
         except Exception as err:
             print(err)
         

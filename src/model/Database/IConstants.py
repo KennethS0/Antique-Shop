@@ -27,6 +27,7 @@ GET_DISTRICTS = 'Geography_getDistricts'
 GET_COMMUNITIES = 'Geography_getCommunities'
 GET_NATIONALITIES = 'Geography_getNationalities'
 GET_AREACODE = 'Geography_getAreaCode'
+GET_COMMUNITY_ID = 'Geography_getCommunityId'
 
 ###########
 # Queries #
@@ -40,6 +41,8 @@ PRODUCT_SEARCH = 'product_search'
 ADD_TO_CART = 'Insertion_AddToCart'
 SELL_PRODUCT = 'Inserton_SellProduct'
 LEAVE_REVIEW = 'Insertion_LeaveReview'
+INSERT_PHONE = 'Insertion_PhoneNumber'
+CONNECT_PHONE = 'Insertion_ConnectPhone'
 
 ####################
 # PARAMETER MODULE #
@@ -53,3 +56,7 @@ SET_KEYWORD_PARAM = 'set_keywordParam'
 ###############################
 GET_PHONE_TYPES = 'getPhoneTypes'
 GET_GENDERS = 'getGenders'
+CHECK_UNIQUE_MOBILE = 'checkUniqueMobile'
+GET_GENDER_ID = 'getGenderId'
+GET_NATIONALITY_ID = 'getNationalityId'
+GET_PHONE_TYPE_ID = 'getPhoneTypeId'

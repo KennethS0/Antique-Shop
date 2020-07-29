@@ -10,7 +10,12 @@ CREATE PROCEDURE SignUp_Person(IN pCitizenshipId BIGINT,
                               IN birth_date DATE,
                               IN gender_id INT,
                               IN nationality_id INT,
-                              IN community_id INT)
+                              IN community_id INT,
+                              IN pUser_name VARCHAR(20),
+                              IN pPassword VARCHAR(200),
+                              IN pNumber INT,
+                              IN pTypeId INT,
+                              IN pAreaId INT)
                               
 	BEGIN
 		-- Duplicate data handler
@@ -18,7 +23,7 @@ CREATE PROCEDURE SignUp_Person(IN pCitizenshipId BIGINT,
         DECLARE EXIT HANDLER FOR 1062
         BEGIN
 			SIGNAL SQLSTATE VALUE '45000'
-            SET MESSAGE_TEXT = 'Do not insert duplicate ID\'s, or try another E-Mail.';
+            SET MESSAGE_TEXT = 'Data already being used by another user';
         END;
         
         -- Data Insertion
@@ -43,25 +48,21 @@ CREATE PROCEDURE SignUp_Person(IN pCitizenshipId BIGINT,
              gender_id,
              nationality_id,
              community_id);
-   END;;
-
--- Procedure used to insert new users into table
--- useraccount
-DROP PROCEDURE IF EXISTS SignUp_Account;
-CREATE PROCEDURE SignUp_Account (IN pPerson_id BIGINT, 
-							 IN pUser_name VARCHAR(20), 
-                             IN pPassword VARCHAR(200))
-	BEGIN
-		-- Duplicate data handler
-		DECLARE duplicate_data CONDITION FOR SQLSTATE '45001';
-        DECLARE EXIT HANDLER FOR 1062
-        BEGIN
-			SIGNAL SQLSTATE VALUE '45000'
-            SET MESSAGE_TEXT = 'Username already taken';
-        END;
-        
-		-- DATA INSERTION
+             
+		-- USER INSERTION
         INSERT INTO useraccount(person_id, user_name, password)
 		VALUES
-			(pPerson_id, pUser_name, MD5(pPassword));
+			(pCitizenshipId, pUser_name, MD5(pPassword));
+        
+		-- Phone Insertion
+        INSERT INTO phoneNumber(number, type_id, areacode_id)
+		VALUES
+			(pNumber, pTypeId, pAreaId);
+            
+		-- CONNECT PHONE TO USER
+        INSERT INTO numberxperson (person_id, number_id)
+        VALUES
+			(pCitizenshipId, (SELECT LAST_INSERT_ID()));
+            
+		COMMIT;
    END;;
