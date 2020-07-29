@@ -15,9 +15,9 @@ CREATE PROCEDURE Insertion_SellProduct (pCategoryId INT,
 										pShipmentId INT,
                                         pSellerId INT,
                                         pProductname VARCHAR(100),
-										,
                                         pPrice FLOAT,
-                                        pDescription TEXT)
+                                        pDescription TEXT,
+                                        pPicture VARCHAR(64))
 BEGIN
 	INSERT INTO product (category_id,
 						 shipment_id,
@@ -36,7 +36,10 @@ BEGIN
          CURDATE(),
          pPrice,
          pDescription);
+	INSERT INTO picture (picture, product_id)
+	VALUES (pPicture, LAST_INSERT_ID());
 END;;
+
 
 DELIMITER ;;
 -- Lets a user leave a review of how the interaction was with

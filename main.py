@@ -44,7 +44,7 @@ if __name__ == '__main__':
     registerController = RegisterController(view, model)
     searchController = SearchController(view, model)
     sellingController = SellingController(view, model)
-    productviewController = ProductviewController(view, model)
+    #productviewController = ProductviewController(view, model)
 
     view.show()
     

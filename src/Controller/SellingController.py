@@ -53,12 +53,12 @@ class SellingController:
             
 
             self.model.query(I.SELL_PRODUCT, (category_id, shipment_id, self.model.connectedUser.id,
-                                              name, price, description))                
+                                              name, price, description, file))              
 
-            if file != "images\\":
-                #picture = self.convertToBinary(file)
-                print("Inserting: " + file + "size: " + str(len(file)))
-                self.model.query(I.INSERT_PICTURE, (file, self.model.connectedUser.id))
+            #if file != "images\\":
+            #    #picture = self.convertToBinary(file)
+            #    print("Inserting: " + file)
+            #    self.model.query(I.INSERT_PICTURE, (file, self.model.lastRowID()))
 
             self.model.commit()
             
@@ -98,5 +98,3 @@ class SellingController:
     #    with open(filename, 'rb') as file:
     #        binaryData = file.read()
     #    return binaryData
-
-
