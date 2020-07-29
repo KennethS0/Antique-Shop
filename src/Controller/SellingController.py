@@ -1,6 +1,8 @@
 from ..model.Database import IConstants as I
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 import re
+import os
+import binascii
 
 class SellingController:
 
@@ -8,7 +10,6 @@ class SellingController:
     def __init__(self, pView, pModel):
     
         #    Connects the database model to the view
-
         self.view = pView
         self.model = pModel
 
@@ -30,6 +31,9 @@ class SellingController:
 
         description = str(self.view.ui.Selling_DescriptionInput.toPlainText())
 
+        file = self.view.ui.Selling_PhotoInput.text().strip()
+        file = "images\\" + file
+
         try:
 
             if not name or not description:
@@ -44,15 +48,33 @@ class SellingController:
                 raise Exception('Price cannot be lower than 1')
 
             print("INSERTING PRODUCT: " + str(category_id) + ", " + str(shipment_id) + ", " +
-                  str(self.model.connectedUser.id)+ ", " + name + ", " + str(price) + ", " + description)
+                  str(self.model.connectedUser.id)+ ", " + name + ", " + str(price) + ", " + description
+                  + ", PICTURE FILE: " + file)
             
+
             self.model.query(I.SELL_PRODUCT, (category_id, shipment_id, self.model.connectedUser.id,
-                                              name, price, description))
+                                              name, price, description))                
+
+            if file != "images\\":
+                #picture = self.convertToBinary(file)
+                print("Inserting: " + file + "size: " + str(len(file)))
+                self.model.query(I.INSERT_PICTURE, (file, self.model.connectedUser.id))
+
+            self.model.commit()
+            
+            ##IMAGE DEBUG
+            #msg = QtWidgets.QMessageBox()
+            #msg.setWindowTitle("Success")
+            #msg.setText("XD")
+            #image = QtGui.QImage(file)
+            #msg.setIconPixmap(QtGui.QPixmap(image))
+            #msg.exec_()
 
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle("Success")
             msg.setText("Product added successfully to the store")
             msg.exec_()
+
 
         except Exception as err:
 
@@ -70,4 +92,11 @@ class SellingController:
         msg.setText(pMessage)
         msg.setIcon(QtWidgets.QMessageBox.Critical)
         msg.exec_()
+
+    #def convertToBinary(self,filename):
+    #    #   Convert digital data to binary format
+    #    with open(filename, 'rb') as file:
+    #        binaryData = file.read()
+    #    return binaryData
+
 

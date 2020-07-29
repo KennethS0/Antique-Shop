@@ -38,7 +38,8 @@ PRODUCT_SEARCH = 'product_search'
 # Data Insertion Module #
 #########################
 ADD_TO_CART = 'Insertion_AddToCart'
-SELL_PRODUCT = 'Inserton_SellProduct'
+SELL_PRODUCT = 'Insertion_SellProduct'
+INSERT_PICTURE = 'Product_insertPicture'
 LEAVE_REVIEW = 'Insertion_LeaveReview'
 
 ####################

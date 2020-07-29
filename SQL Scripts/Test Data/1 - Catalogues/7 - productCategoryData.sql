@@ -11,3 +11,4 @@ INSERT INTO productcategory (name)
         ('SHOES');
         
 INSERT INTO productcategory (name) VALUES ('PAINTING');
+INSERT INTO productcategory (name) VALUES ('BOOKS');

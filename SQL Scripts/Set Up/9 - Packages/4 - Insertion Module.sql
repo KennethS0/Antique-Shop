@@ -15,6 +15,7 @@ CREATE PROCEDURE Insertion_SellProduct (pCategoryId INT,
 										pShipmentId INT,
                                         pSellerId INT,
                                         pProductname VARCHAR(100),
+										,
                                         pPrice FLOAT,
                                         pDescription TEXT)
 BEGIN
@@ -53,3 +54,13 @@ BEGIN
          pNumStars,
          pUse_Reviewed_id);
 END;;
+
+DELIMITER ;;
+-- Inserts picture path
+DROP PROCEDURE IF EXISTS Product_insertPicture;
+CREATE PROCEDURE Product_insertPicture (pPicture VARCHAR(64), pProductID INT)
+BEGIN
+	INSERT INTO picture (picture, product_id) 
+		VALUES (pPicture, pProductID);
+END;;
+
