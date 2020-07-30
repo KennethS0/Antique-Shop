@@ -16,4 +16,4 @@ class ChatController:
         '''
             Loads the users that have messaged the logged on user
         '''
-        users = self.model.query(I.GET_MESSAGED_USERS, (self.model.connectedUser.id))
+        # users = self.model.query(I.GET_MESSAGED_USERS, (self.model.connectedUser.id))
