@@ -77,9 +77,14 @@ class SearchController:
                         item.setFlags( Qt.ItemIsSelectable |  Qt.ItemIsEnabled )
                         self.view.ui.Search_TableProductInput.setItem(i,j,item)
             
-        except:
-            self.showError('ERROR', 'Fatal error')
-            return
+        except Exception as err:
+
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle('ERROR')
+            msg.setText(str(err))
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+
+            msg.exec_()
 
     def selectProduct(self, row, column):
         #print("SELECTED PRODUCT ID " + self.view.ui.Search_TableProductInput.item(row, 0).text())
