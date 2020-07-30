@@ -69,12 +69,7 @@ ADD_CART = 'Product_addToCart'
 ADD_WISHLIST = 'Product_addToWishlist'
 GET_CART = 'Product_getCart'
 GET_WISHLIST = 'Product_getWishlist'
-
-
-###################
-# Messages Module #
-###################
-GET_MESSAGED_USERS = 'Chat_GetUsers'
+REMOVE_CART = 'Product_removeCart'
 
 ###############################
 # Personal Information Module #

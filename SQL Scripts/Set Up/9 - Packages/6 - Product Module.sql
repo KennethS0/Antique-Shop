@@ -74,3 +74,11 @@ BEGIN
 		INNER JOIN wishlist AS wl ON product.id = wl.product_id
     WHERE wl.user_id = pUserID;	
 END;;
+
+DELIMITER ;;
+-- Removes a product from a cart
+DROP PROCEDURE IF EXISTS Product_removeCart;
+CREATE PROCEDURE Product_removeCart (pProductID INT, pUserID INT)
+BEGIN
+	DELETE FROM cart WHERE product_id = pProductID AND user_id = pUserID;
+END;;
