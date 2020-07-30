@@ -69,6 +69,11 @@ GET_PRODUCT = 'Product_getProduct'
 ADD_CART = 'Product_addToCart'
 ADD_WISHLIST = 'Product_addToWishlist'
 
+###################
+# Messages Module #
+###################
+I.GET_MESSAGED_USERS = 'Chat_GetUsers'
+
 ###############################
 # Personal Information Module #
 ###############################

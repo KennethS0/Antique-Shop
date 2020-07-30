@@ -279,3 +279,4 @@ class RegisterController:
         self.view.ui.Register_UsernameInput.clear()
         self.view.ui.Register_PasswordInput.clear()
         self.view.ui.Register_ConfirmPasswordInput.clear()
+        self.view.showLogin()

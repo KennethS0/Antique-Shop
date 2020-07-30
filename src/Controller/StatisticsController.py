@@ -68,7 +68,7 @@ class StatisticsController:
         # Creates the slices
         series = QPieSeries(self.chart)
         for i in range(len(pData)):
-            slice = series.append('{}, Total: {}, Percentage: {}'.format(str(pData[i][0]), str(pData[i][1]), str(pData[i][2])), pData[i][2])
+            slice = series.append('{} | {} | {}%'.format(str(pData[i][0]), str(pData[i][1]), str(pData[i][2])), pData[i][2])
             slice.setLabelVisible(True)
         
         self.chart.addSeries(series)
