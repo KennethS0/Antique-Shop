@@ -10,8 +10,8 @@ CREATE PROCEDURE sellers_by_age()
 			WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(birth_date, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(birth_date, '00-%m-%d'))) <= 50 THEN '50+' 
 		END 
 		AS age,
-		COUNT(*) total,
-		(COUNT(*) * 100 / (SELECT COUNT(*) FROM person)) AS percentage
+		COUNT(DISTINCT pr.seller_id) total,
+		(COUNT(DISTINCT pr.seller_id) * 100 / (SELECT COUNT(*) FROM person)) AS percentage
 		FROM person AS p
         
         INNER JOIN useraccount AS ua
@@ -28,3 +28,4 @@ CREATE PROCEDURE sellers_by_age()
 -- 20 - 30 years
 -- 30 - 50 years
 -- 50+ years
+call sellers_by_age();

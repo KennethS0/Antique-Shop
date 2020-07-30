@@ -38,6 +38,7 @@ BEGIN
          pDescription);
 	INSERT INTO picture (picture, product_id)
 	VALUES (pPicture, LAST_INSERT_ID());
+    COMMIT;
 END;;
 
 

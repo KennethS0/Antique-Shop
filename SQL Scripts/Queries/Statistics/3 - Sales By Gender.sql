@@ -2,8 +2,8 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS sales_by_gender;;
 CREATE PROCEDURE sales_by_gender()
 	BEGIN
-		SELECT ge.name AS Name, COUNT(pr.id) AS Amount,
-        (COUNT(*) * 100 / (SELECT COUNT(*) FROM product)) AS percentage 
+		SELECT ge.name AS Name, COUNT(pr.buyer_id) AS Amount,
+        (COUNT(pr.buyer_id) * 100 / (SELECT COUNT(*) FROM product)) AS percentage 
         FROM gender AS ge
         
         INNER JOIN person AS P
