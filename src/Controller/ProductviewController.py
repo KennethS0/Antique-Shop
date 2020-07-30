@@ -12,7 +12,19 @@ class ProductviewController:
         self.model = pModel
 
 
-    def setProduct(self,productid): # configures the display of the specified product
-        self.product = self.model.query(I.GET_PRODUCT, [productid])
+    def setProduct(self, productid): # configures the display of the specified product
+        try:
+            self.product = self.model.query(I.GET_PRODUCT, [productid])
+            print(self.product)
+            #print("ProductviewController: PRODUCT SET: " + str(productid))
+            self.view.ui.Product_NameDisplay.setText(str(self.product[0][1]))
+            
 
-        self.view.ui.Product_NameDisplay.setText(product[1])
+        except Exception as err:
+
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle('ERROR')
+            msg.setText(str(err))
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+
+            msg.exec_()

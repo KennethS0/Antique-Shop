@@ -39,6 +39,9 @@ class SellingController:
             if not name or not description:
                 raise Exception('Please add a name and a description to your item')
 
+            if file == "images\\":
+                raise Exception('Please add a name and a description to your item')
+
             category_id = self.categories[self.view.ui.Selling_CategoryInput.currentIndex()][0]
             shipment_id = self.shipments[self.view.ui.Selling_ViaInput.currentIndex()][0]
 

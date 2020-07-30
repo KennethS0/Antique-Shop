@@ -3,6 +3,7 @@ from ..model.Database import IConstants as I
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt
 import re
+from src.Controller.ProductviewController import ProductviewController
 
 class SearchController:
     '''
@@ -38,7 +39,9 @@ class SearchController:
         self.view.ui.Search_TableProductInput.cellDoubleClicked.connect(self.selectProduct)
         
         #self.view.ui.Search_TableProductInput.viewport().installEventFilter(self.view)
-        self.view.ui.Search_SearchButton.clicked.connect(self.searchProduct)           
+        self.view.ui.Search_SearchButton.clicked.connect(self.searchProduct)
+        
+        self.productviewController = ProductviewController(self.view, self.model)
 
     def searchProduct(self):
         self.view.ui.Search_TableProductInput.clear()
@@ -65,8 +68,6 @@ class SearchController:
                 print('No products match the search parameters!')
             else:
                 self.view.ui.Search_TableProductInput.setRowCount(len(products))
-
-                print(products[0])
                 
                 #item = QtWidgets.QTableWidgetItem("e")
                 
@@ -81,5 +82,10 @@ class SearchController:
             return
 
     def selectProduct(self, row, column):
-        print("SELECTED PRODUCT ID " + self.view.ui.Search_TableProductInput.item(row, 0).text())
+        #print("SELECTED PRODUCT ID " + self.view.ui.Search_TableProductInput.item(row, 0).text())
+        
+        self.productviewController.setProduct(int(self.view.ui.Search_TableProductInput.item(row, 0).text()))
+        self.view.showProduct()
+        
+    
         

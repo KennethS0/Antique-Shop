@@ -55,7 +55,7 @@ SET_KEYWORD_PARAM = 'set_keywordParam'
 GET_MERCHANDISE = 'Product_getMerchandise'
 GET_CATEGORIES = 'Product_getCategories'
 GET_SHIPMENTS = 'Product_getShipments'
-GET_PRODUCT = 'Product_gatProduct'
+GET_PRODUCT = 'Product_getProduct'
 
 ###############################
 # Personal Information Module #
