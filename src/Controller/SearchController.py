@@ -50,19 +50,16 @@ class SearchController:
             # GET PARAMETERS FROM INPUT
             category = str(self.view.ui.Search_CategoryInput.currentText())
             if category == 'ANY':
-                category = ''
-            price = str(self.view.ui.Search_PriceInput.currentText())
-            keyword = self.view.ui.Search_ProducNametInput.text().strip()
-        
-            print("SEARCHING PRODUCT... CATEGORY: " + category + ", PRICE: " + price + ", KEYWORD: " + keyword)
+                category = None
 
-            self.model.query(I.SET_CATEGORY_PARAM, [category])
-            self.model.query(I.SET_PRICE_PARAM, [price])
-            self.model.query(I.SET_KEYWORD_PARAM, [keyword])
-            self.model.commit()
+            price = self.view.ui.Search_PriceInput.currentText()
+            if price == 'ANY':
+                price = 1000000
+
+            keyword = self.view.ui.Search_ProducNametInput.text().strip()
 
             # EXECUTES SEARCH PRODUCT QUERY
-            products = self.model.query(I.PRODUCT_SEARCH)
+            products = self.model.query(I.PRODUCT_SEARCH, (keyword, category, int(price)))
 
             if products == []:
                 print('No products match the search parameters!')

@@ -1,18 +1,27 @@
 DELIMITER ;;
 DROP PROCEDURE IF EXISTS product_search;
-CREATE PROCEDURE product_search()
-	BEGIN
-		SELECT product.id AS id, product.productname AS product_name, product.price AS price, cat.name AS category 
-		FROM product 
-			INNER JOIN ad.parameter AS par_keyword ON par_keyword.name = "product_search_keyword"
-            INNER JOIN ad.parameter AS par_category ON par_category.name = "category"
-            INNER JOIN ad.parameter AS par_price ON par_price.name = "price"
-            INNER JOIN productcategory AS cat ON category_id = cat.id
-		WHERE UPPER(productname) LIKE UPPER(CONCAT('%',par_keyword.value,'%')) 
-			AND cat.name LIKE CONCAT('%',par_category.value,'%')
-			AND price <= CAST(par_price.value AS UNSIGNED)
-            ;
-	END;;
+CREATE PROCEDURE product_search(pProductName VARCHAR(100),
+								pCategoryName VARCHAR(100),
+                                pPrice INT)
+BEGIN
+		IF pCategoryName IS NOT NULL THEN
+			SELECT pr.id, pr.productname, pr.price, c.name FROM product AS pr
+		
+			INNER JOIN productcategory AS c
+			ON pr.category_id = c.id
+    
+			WHERE UPPER(pr.productname) LIKE UPPER(CONCAT('%', pProductName, '%'))
+				AND pr.price <= pPrice AND c.name = pCategoryName;
+        ELSE
+			SELECT pr.id, pr.productname, pr.price, c.name FROM product AS pr
+		
+			INNER JOIN productcategory AS c
+			ON pr.category_id = c.id
+    
+			WHERE UPPER(pr.productname) LIKE UPPER(CONCAT('%', pProductName, '%'))
+				AND pr.price <= pPrice;
+		END IF;
+END;;
 -- Procedure to search products based on a match between their name and a string stored on the parameters table.
 -- Both strings are converted to uppercase so the search is case insensitive.
 -- The parameter name is "product_search_keyword" and it has to be changed to the desired value before calling
