@@ -50,3 +50,27 @@ CREATE PROCEDURE Product_addToWishlist (pProductID INT, pUserID INT)
 BEGIN
 	INSERT INTO wishlist (product_id, user_id) VALUES (pProductID, pUserID);
 END;;
+
+DELIMITER ;;
+-- Gets the products in the wishlist of a specific user
+DROP PROCEDURE IF EXISTS Product_getCart;
+CREATE PROCEDURE Product_getCart (IN pUserID INT)
+BEGIN
+	SELECT product.id AS id, product.productname AS product_name, product.price AS price, cat.name AS category
+	FROM product
+		INNER JOIN productcategory AS cat ON category_id = cat.id
+		INNER JOIN cart AS ct ON product.id = ct.product_id
+    WHERE ct.user_id = pUserID;	
+END;;
+
+DELIMITER ;;
+-- Gets the products in the wishlist of a specific user
+DROP PROCEDURE IF EXISTS Product_getWishlist;
+CREATE PROCEDURE Product_getWishlist (IN pUserID INT)
+BEGIN
+	SELECT product.id AS id, product.productname AS product_name, product.price AS price, cat.name AS category
+	FROM product
+		INNER JOIN productcategory AS cat ON category_id = cat.id
+		INNER JOIN wishlist AS wl ON product.id = wl.product_id
+    WHERE wl.user_id = pUserID;	
+END;;
