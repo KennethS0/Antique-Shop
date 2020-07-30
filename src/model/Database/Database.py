@@ -132,11 +132,10 @@ class Database:
             
             cursor.callproc(I.IS_ADMIN, (userData[0][0],))
             # Sets the admin state in the user
-
-            cursor.close()
-
+            
             for isAdmin in cursor.stored_results():
                 self.connectedUser.isAdmin = isAdmin.fetchall()[0][0]
+                break
         else:
             raise Exception('Incorrect username or password.')
 

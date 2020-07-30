@@ -30,7 +30,12 @@ class LoginController:
             self.model.logIn(username, password)
             self.cancelLogin()
             
+            if not self.model.connectedUser.isAdmin:
+                self.view.ui.UserMenu_StatisticsButton.hide()
+                self.view.ui.UserMenu_TableButton.hide()
+
             self.view.showUserMenu()
+
             # self.chatController = ChatController(self.view, self.model)
             self.queriesController = QueriesController(self.view, self.model)
         except Exception as err:
