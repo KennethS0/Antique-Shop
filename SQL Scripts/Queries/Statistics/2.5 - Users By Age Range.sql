@@ -11,7 +11,7 @@ CREATE PROCEDURE sellers_by_age()
 		END 
 		AS age,
 		COUNT(DISTINCT pr.seller_id) total,
-		(COUNT(DISTINCT pr.seller_id) * 100 / (SELECT COUNT(*) FROM person)) AS percentage
+		(COUNT(DISTINCT pr.seller_id) * 100 / (SELECT COUNT(DISTINCT seller_id) FROM product)) AS percentage
 		FROM person AS p
         
         INNER JOIN useraccount AS ua
