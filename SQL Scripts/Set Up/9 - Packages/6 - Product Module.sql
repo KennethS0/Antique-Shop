@@ -119,3 +119,15 @@ BEGIN
 		INNER JOIN seen AS sn ON product.id = sn.product_id
     WHERE sn.user_id = pUserID;	
 END;;
+
+-- Selects products seen by a user
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS Product_getPurchased;
+CREATE PROCEDURE Product_getPurchased (pUserID INT)
+BEGIN
+	SELECT product.id AS id, product.productname AS product_name, product.price AS price, cat.name AS category
+	FROM product
+		INNER JOIN productcategory AS cat ON category_id = cat.id
+    WHERE product.buyer_id = pUserID
+    ORDER BY date_bought;	
+END;;

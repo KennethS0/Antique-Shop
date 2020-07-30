@@ -39,7 +39,7 @@ PRODUCTS_SOLD = 'sale_history'
 MOST_EXPENSIVE_SALES = 'expensive_purchases'
 TOP_SELLERS = 'top_sellers'
 TOP_BUYERS = 'top_buyers'
-MIN_MAX_PRICES = 'min_max_prices'
+
 
 #################
 # Admin Queries #
@@ -80,6 +80,7 @@ REMOVE_CART = 'Product_removeCart'
 ADD_SEEN = 'Product_addSeen'
 GET_SEEN = 'Product_getSeen'
 PURCHASE_PRODUCTS = 'Product_purchase'
+GET_PURCHASED = 'Product_getPurchased'
 
 ###############################
 # Personal Information Module #
