@@ -34,7 +34,6 @@ GET_AREACODE = 'Geography_getAreaCode'
 ###########
 PRODUCT_SEARCH = 'product_search'
 
-
 #################
 # Admin Queries #
 #################
@@ -68,6 +67,9 @@ GET_SHIPMENTS = 'Product_getShipments'
 GET_PRODUCT = 'Product_getProduct'
 ADD_CART = 'Product_addToCart'
 ADD_WISHLIST = 'Product_addToWishlist'
+GET_CART = 'Product_getCart'
+GET_WISHLIST = 'Product_getWishlist'
+
 
 ###############################
 # Personal Information Module #
