@@ -21,6 +21,7 @@ class CartController:
         self.view.ui.Cart_CartTableInput.cellDoubleClicked.connect(self.selectProduct)
         #self.view.ui.Cart_CartTableInput.cellClicked.connect(partial(self.selectItem, item))
         self.productviewController = ProductviewController(self.view, self.model)
+        self.view.ui.Cart_BuyButton.clicked.connect(self.buyProducts)
 
         
 
@@ -76,6 +77,7 @@ class CartController:
         userID = self.model.connectedUser.id
         try:
             self.model.query(I.REMOVE_CART, (productID,userID))
+            self.model.commit()
             self.refreshCart()
             
         except Exception as err:
@@ -85,7 +87,25 @@ class CartController:
             msg.setIcon(QtWidgets.QMessageBox.Critical)
             msg.exec_()
 
-
-
-
+    def buyProducts(self):
+        for i in range(self.view.ui.Cart_CartTableInput.rowCount()):
+            try:
+                productID = int(self.view.ui.Cart_CartTableInput.item(i, 0).text())
+                if productID != "":
+                    self.model.query(I.PURCHASE_PRODUCTS, (productID, self.model.connectedUser.id))
+                    self.model.query(I.REMOVE_CART, (productID, self.model.connectedUser.id))
+                    self.model.commit()
+            except Exception as err:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR')
+                msg.setText(str(err))
+                msg.setIcon(QtWidgets.QMessageBox.Critical)
+                msg.exec_()
+                
+        self.refreshCart()
+        msg = QtWidgets.QMessageBox()
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Success")
+        msg.setText("Products purchased successfully")
+        msg.exec_()
             

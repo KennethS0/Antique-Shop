@@ -19,6 +19,7 @@ class MainWindow:
         #Available Functionalities for Users (Non-Admins)
         self.ui.UserMenu_SearchButton.clicked.connect(self.showSearch)
         self.ui.UserMenu_PurchaseHistoryButton.clicked.connect(self.showPurchaseHistory)
+        self.ui.UserMenu_RecentlySeenButton.clicked.connect(self.showRecentlySeen)
         self.ui.UserMenu_MessagesButton.clicked.connect(self.showMessages)
         self.ui.UserMenu_SellingButton.clicked.connect(self.showSelling)
         self.ui.UserMenu_ReviewsButton.clicked.connect(self.showReviews)
@@ -64,6 +65,9 @@ class MainWindow:
 
     def showPurchaseHistory(self):
         self.ui.UserMenu_WidgetGroup.setCurrentWidget(self.ui.PurchaseHistoryPage)
+
+    def showRecentlySeen(self):
+        self.ui.UserMenu_WidgetGroup.setCurrentWidget(self.ui.RecentlySeenPage)
 
     def showMessages(self):
         self.ui.UserMenu_WidgetGroup.setCurrentWidget(self.ui.MessagesPage)
