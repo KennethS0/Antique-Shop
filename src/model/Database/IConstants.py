@@ -74,7 +74,7 @@ GET_WISHLIST = 'Product_getWishlist'
 ###################
 # Messages Module #
 ###################
-I.GET_MESSAGED_USERS = 'Chat_GetUsers'
+GET_MESSAGED_USERS = 'Chat_GetUsers'
 
 ###############################
 # Personal Information Module #
