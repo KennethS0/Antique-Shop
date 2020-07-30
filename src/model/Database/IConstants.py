@@ -39,7 +39,7 @@ PRODUCTS_SOLD = 'sale_history'
 MOST_EXPENSIVE_SALES = 'expensive_purchases'
 TOP_SELLERS = 'top_sellers'
 TOP_BUYERS = 'top_buyers'
-
+MIN_MAX_PRICES = 'min_max_prices'
 
 #################
 # Admin Queries #
