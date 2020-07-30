@@ -83,15 +83,17 @@ BEGIN
 	DELETE FROM cart WHERE product_id = pProductID AND user_id = pUserID;
 END;;
 
-/*
 DELIMITER ;;
 -- Purchases a product for a user
 DROP PROCEDURE IF EXISTS Product_purchase;
 CREATE PROCEDURE Product_purchase (pProductID INT, pUserID INT)
 BEGIN
-	DELETE FROM cart WHERE product_id = pProductID AND user_id = pUserID;
+	UPDATE product SET 
+		buyer_id = pUserID, 
+        state = 'sold',
+        date_bought = SYSDATE()
+    WHERE product.id = pProductID;
 END;;
-*/
 
 -- Adds a product to the products seen by a user
 DELIMITER ;;

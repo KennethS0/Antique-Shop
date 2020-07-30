@@ -19,7 +19,7 @@ BEGIN
 			ON pr.category_id = c.id
     
 			WHERE UPPER(pr.productname) LIKE UPPER(CONCAT('%', pProductName, '%'))
-				AND pr.price <= pPrice;
+				AND pr.price <= pPrice AND state = 'available';
 		END IF;
 END;;
 -- Procedure to search products based on a match between their name and a string stored on the parameters table.
