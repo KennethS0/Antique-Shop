@@ -37,6 +37,9 @@ PRODUCT_SEARCH = 'product_search'
 PRODUCTS_SEEN = 'seen_products'
 PRODUCTS_SOLD = 'sale_history'
 MOST_EXPENSIVE_SALES = 'expensive_purchases'
+TOP_SELLERS = 'top_sellers'
+TOP_BUYERS = 'top_buyers'
+
 
 #################
 # Admin Queries #

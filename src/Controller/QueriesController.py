@@ -20,8 +20,8 @@ class QueriesController:
         }
 
         if self.model.connectedUser.isAdmin:
-            # self.queries[]
-            pass
+            self.queries['Top Sellers'] = [I.TOP_SELLERS, ['ID', 'USERNAME', 'AMOUNT OF SALES'], ()]
+            self.queries['Top Buyers'] = [I.TOP_BUYERS, ['ID', 'USERNAME', 'AMOUNT OF PURCHASES'], ()]
 
         for query in self.queries:
             self.view.ui.Queries_QueriesInput.addItem(query)

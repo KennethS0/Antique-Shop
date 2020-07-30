@@ -8,3 +8,5 @@ CREATE PROCEDURE min_max_prices()
 	END;;
 -- Procedure to get the top N users with most products purchased
 -- Returns ID, Username and number of purchases
+
+call min_max_prices();

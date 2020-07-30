@@ -137,7 +137,7 @@ CREATE TRIGGER phonenumber_update
 			NEW.modification_user = USER();
     END;;
     
-
+    
 CREATE TRIGGER picture_update
 	BEFORE update ON ge.picture
     FOR EACH ROW

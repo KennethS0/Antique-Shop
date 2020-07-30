@@ -20,5 +20,3 @@ BEGIN
 END;;
 -- Procedure to get the top N users with most products purchased
 -- Returns ID, Username and number of purchases
-
-call top_buyers;
