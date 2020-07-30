@@ -16,5 +16,4 @@ CREATE PROCEDURE sale_history(IN user_id INT)
 -- Procedure used to get all the sales made by one user.
 -- The INPUT parameter is the id of the user for whom the history is being shown.
 -- Outputs the product ID, name of the product, the buyer username, 
--- -- product price, the sale date.
-call sale_history(17); 
+-- -- product price, the sale date. 

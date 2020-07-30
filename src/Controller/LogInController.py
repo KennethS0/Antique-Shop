@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 from src.Controller.SellingController import SellingController
+from src.Controller.QueriesController import QueriesController
 
 class LoginController:
     '''
@@ -31,6 +32,7 @@ class LoginController:
             
             self.view.showUserMenu()
             # self.chatController = ChatController(self.view, self.model)
+            self.queriesController = QueriesController(self.view, self.model)
         except Exception as err:
 
             msg = QtWidgets.QMessageBox()
