@@ -22,6 +22,7 @@ class QueriesController:
         if self.model.connectedUser.isAdmin:
             self.queries['Top Sellers'] = [I.TOP_SELLERS, ['ID', 'USERNAME', 'AMOUNT OF SALES'], ()]
             self.queries['Top Buyers'] = [I.TOP_BUYERS, ['ID', 'USERNAME', 'AMOUNT OF PURCHASES'], ()]
+            self.queries['Min and Max per Category'] = [I.MIN_MAX_PRICES, ['CATEGORY', 'MAX', 'MIN'], ()]
 
         for query in self.queries:
             self.view.ui.Queries_QueriesInput.addItem(query)
