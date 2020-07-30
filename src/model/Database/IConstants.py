@@ -28,7 +28,6 @@ GET_DISTRICTS = 'Geography_getDistricts'
 GET_COMMUNITIES = 'Geography_getCommunities'
 GET_NATIONALITIES = 'Geography_getNationalities'
 GET_AREACODE = 'Geography_getAreaCode'
-GET_COMMUNITY_ID = 'Geography_getCommunityId'
 
 ###########
 # Queries #
@@ -75,6 +74,7 @@ GET_CART = 'Product_getCart'
 GET_WISHLIST = 'Product_getWishlist'
 REMOVE_CART = 'Product_removeCart'
 ADD_SEEN = 'Product_addSeen'
+GET_SEEN = 'Product_getSeen'
 PURCHASE_PRODUCTS = 'Product_purchase'
 
 ###############################
@@ -82,7 +82,3 @@ PURCHASE_PRODUCTS = 'Product_purchase'
 ###############################
 GET_PHONE_TYPES = 'getPhoneTypes'
 GET_GENDERS = 'getGenders'
-GET_NATIONALITY_ID = 'getNationalityId'
-GET_GENDER_ID = 'getGenderId'
-GET_PHONE_TYPE_ID = 'getPhoneTypeId'
-CHECK_UNIQUE_MOBILE = 'checkUniqueMobile'

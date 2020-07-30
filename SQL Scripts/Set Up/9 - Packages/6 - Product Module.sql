@@ -40,7 +40,12 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS Product_addToCart;
 CREATE PROCEDURE Product_addToCart (pProductID INT, pUserID INT)
 BEGIN
-	INSERT INTO cart (product_id, user_id) VALUES (pProductID, pUserID);
+	-- DECLARE EXIT HANDLER FOR SQLSTATE '45000' SELECT 'Product no longer available';
+	IF (SELECT product.state FROM product WHERE product.id = pProductID) = 'sold' THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Product no longer available';
+    ELSE
+		INSERT INTO cart (product_id, user_id) VALUES (pProductID, pUserID);
+	END IF;
 END;;
 
 -- Adds a product to the wishlist of the specified user
@@ -101,4 +106,16 @@ DROP PROCEDURE IF EXISTS Product_addSeen;
 CREATE PROCEDURE Product_addSeen (pProductID INT, pUserID INT)
 BEGIN
 	INSERT INTO seen (product_id, user_id, date_seen) VALUES (pProductID, pUserID, SYSDATE());
+END;;
+
+-- Selects products seen by a user
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS Product_getSeen;
+CREATE PROCEDURE Product_getSeen (pUserID INT)
+BEGIN
+	SELECT product.id AS id, product.productname AS product_name, product.price AS price, cat.name AS category
+	FROM product
+		INNER JOIN productcategory AS cat ON category_id = cat.id
+		INNER JOIN seen AS sn ON product.id = sn.product_id
+    WHERE sn.user_id = pUserID;	
 END;;

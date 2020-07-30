@@ -7,6 +7,7 @@ from src.Controller.ProductviewController import ProductviewController
 from src.Controller.ChatController import ChatController
 from src.Controller.WishlistController import WishlistController
 from src.Controller.CartController import CartController
+from src.Controller.SeenController import SeenController
 from src.view.mainWindow import MainWindow
 from src.model.Database import Database as dbm
 from PyQt5 import QtWidgets
@@ -38,6 +39,7 @@ if __name__ == '__main__':
     sellingController = SellingController(view, model)
     wishlistController = WishlistController(view, model)
     cartController = CartController(view, model)
+    seenController = SeenController(view, model)
 
     view.show()
     
