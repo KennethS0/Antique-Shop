@@ -5,12 +5,10 @@ CREATE PROCEDURE profit_by_gender()
 		DECLARE total_profits FLOAT;
     
 		SELECT gen.name, SUM(pr.price) AS total,
-        (SUM(pr.price) * 100/ (SELECT pr.price FROM product
+        (SUM(pr.price) * 100/ (SELECT SUM(price) FROM product
 			WHERE buyer_id IS NOT NULL)) AS percentage
         
         FROM gender AS gen
-        
-        
         
         INNER JOIN person AS p
         ON p.gender_id = gen.id
