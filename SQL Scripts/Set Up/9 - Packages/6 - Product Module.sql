@@ -27,9 +27,26 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS Product_getProduct;
 CREATE PROCEDURE Product_getProduct (pID INT)
 BEGIN
-	SELECT product.id, productname, shipment_id, acc.user_name, price, pic.picture, description
+	SELECT product.id, productname, ship.name, acc.user_name, price, pic.picture, description
     FROM product
 		INNER JOIN useraccount AS acc ON seller_id = acc.id
         INNER JOIN picture AS pic ON  product.id = pic.product_id
+        INNER JOIN shipment AS ship ON product.shipment_id = ship.id
 	WHERE product.id = pID;
+END;;
+
+-- Adds a product to the cart of the specified user
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS Product_addToCart;
+CREATE PROCEDURE Product_addToCart (pProductID INT, pUserID INT)
+BEGIN
+	INSERT INTO cart (product_id, user_id) VALUES (pProductID, pUserID);
+END;;
+
+-- Adds a product to the wishlist of the specified user
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS Product_addToWishlist;
+CREATE PROCEDURE Product_addToWishlist (pProductID INT, pUserID INT)
+BEGIN
+	INSERT INTO wishlist (product_id, user_id) VALUES (pProductID, pUserID);
 END;;

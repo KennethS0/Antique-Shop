@@ -18,7 +18,6 @@ class MainWindow:
 
         #Available Functionalities for Users (Non-Admins)
         self.ui.UserMenu_SearchButton.clicked.connect(self.showSearch)
-        self.ui.Search_OpenProductPageButton.clicked.connect(self.showProduct)
         self.ui.UserMenu_PurchaseHistoryButton.clicked.connect(self.showPurchaseHistory)
         self.ui.UserMenu_MessagesButton.clicked.connect(self.showMessages)
         self.ui.UserMenu_SellingButton.clicked.connect(self.showSelling)
