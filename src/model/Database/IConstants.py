@@ -33,6 +33,9 @@ GET_AREACODE = 'Geography_getAreaCode'
 # Queries #
 ###########
 PRODUCT_SEARCH = 'product_search'
+PRODUCTS_SEEN = 'seen_products'
+PRODUCTS_SOLD = 'sale_history'
+PURCHASE_BY_CATEGORY = 'expensive_purchases'
 
 #################
 # Admin Queries #

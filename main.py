@@ -14,15 +14,6 @@ import sys
 from datetime import datetime
 
 if __name__ == '__main__':
-    # try:
-        
-
-    #     db.logIn('KennethS0', 'Passwordxd')
-    #     db.revokeAdmin('KennethS01')
-
-    # except Exception as err:
-    #     print(err)
-    # 
            
     app = QtWidgets.QApplication(sys.argv)
 
