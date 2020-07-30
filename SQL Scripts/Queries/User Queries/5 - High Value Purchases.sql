@@ -23,3 +23,5 @@ CREATE PROCEDURE expensive_purchases(IN user_id INT)
 -- The INPUT parameter is the id of the user who bought the products
 -- Outputs the product ID, name of the product, the seller username, seller's country, 
 -- -- product price, the sale date. 
+
+call expensive_purchases(17);

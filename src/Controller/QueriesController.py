@@ -10,8 +10,13 @@ class QueriesController:
 
         # Defining the data
         self.queries = {
-            'Sold Products': [I.PRODUCTS_SOLD, ['ID', 'Product', 'Buyer', 'Price', 'Date Bought']],
-            'Purchases by category': [I.PURCHASE_BY_CATEGORY,  ['ID', 'Product', 'Buyer', 'Country', 'Price', 'Date Bought']]
+            'Sold Products': [I.PRODUCTS_SOLD,
+                              ['ID', 'Product', 'Buyer', 'Price', 'Date Bought'], 
+                              (self.model.connectedUser.id, )],
+            
+            'Most expensive sales': [I.MOST_EXPENSIVE_SALES,  
+                                      ['ID', 'Product', 'Buyer', 'Country', 'Price', 'Date Bought'],
+                                      (self.model.connectedUser.id, )]
         }
 
         if self.model.connectedUser.isAdmin:
@@ -42,13 +47,19 @@ class QueriesController:
         '''
             Loads the information obtained from the query into the table
         '''
-        queryName = self.view.ui.Queries_QueriesInput.currentText()
-        queryData = self.queries[queryName]
+        try:
+            queryName = self.view.ui.Queries_QueriesInput.currentText()
+            queryData = self.queries[queryName]
 
-        results = self.model.query(queryData[0])
+            results = self.model.query(queryData[0], queryData[2])
 
-        # Loads queried data
-        for i in range(len(results)):
-            for j in range(queryData[1]):
-                item = QtWidgets.QTableWidgetItem(str(products[i][j]))
-                self.view.ui.Search_TableProductInput.setItem(i, j, item)
+            self.view.ui.Queries_QueriesTableDisplay.setRowCount(len(results))
+
+            # Loads queried data
+            for i in range(len(results)):
+                for j in range(len(queryData[1])):
+                    item = QtWidgets.QTableWidgetItem(str(results[i][j]))
+                    self.view.ui.Queries_QueriesTableDisplay.setItem(i, j, item)
+            
+        except Exception as err:
+            print(err)
