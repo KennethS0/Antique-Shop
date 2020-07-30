@@ -1,5 +1,6 @@
 from PyQt5.QtChart import QChart, QChartView, QPieSeries, QPieSlice, QLegend
 from PyQt5.Qt import QVBoxLayout
+from ..model.Database import IConstants as I
 
 class StatisticsController:
     '''
@@ -15,34 +16,59 @@ class StatisticsController:
         self.model = pModel
         self.view = pView 
 
+        self.queries = {
+            'Products by category': I.PRODUCTS_BY_CATEGORY,
+            'Sellers by gender': I.SELLERS_BY_GENDER,
+            'Sellers by age': I.SELLERS_BY_AGE,
+            'Total sales by gender': I.SALES_BY_GENDER,
+            'Total sales profit by gender': I.PROFITS_BY_GENDER
+        }
+
         # Loads every admin statistic
-        self.view.ui.
-        
+        for key in self.queries:
+            self.view.ui.Statistics_StatisticsInput.addItem(key)
 
-    def loadChart(self, pTitle, pData):
-        '''
-            Loads a chart and embeds it in the application
-        '''
-        # Creates the chart
-        chart = QChart()
-        chart.setTitle(pTitle)
+        self.view.ui.Statistics_ShowButton.clicked.connect(self.loadQuery)
 
-        # Creates the slices
-        series = QPieSeries(chart)
-        
-        for name, value in pData:
-            slice = series.append(name, value)
-            slice.setLabelVisible(True)
-
-        chart.addSeries(series)
-        chart.createDefaultAxes()
+        # Sets up the chart
+        self.chart = QChart()
 
         # Embeds the chart in the application
         layout = QVBoxLayout()
 
-        chartView = QChartView(chart)
+        chartView = QChartView(self.chart)
 
         layout.addWidget(chartView)
         chartView.show()
 
         self.view.ui.Statistics_StatisticsWidget.setLayout(layout)
+
+
+    def loadQuery(self):
+        '''
+            loads a query and its information
+        '''
+        queryName = self.view.ui.Statistics_StatisticsInput.currentText()
+        query = self.queries[queryName]
+
+        result = self.model.query(query)
+
+        self.loadChart(queryName, result)
+
+
+    def loadChart(self, pTitle, pData):
+        '''
+            Loads a chart and embeds it in the application
+        '''
+        
+        # Creates the chart
+        self.chart.setTitle(pTitle)
+        self.chart.removeAllSeries()
+        
+        # Creates the slices
+        series = QPieSeries(self.chart)
+        for i in range(len(pData)):
+            slice = series.append('{}, Total: {}, Percentage: {}'.format(str(pData[i][0]), str(pData[i][1]), str(pData[i][2])), pData[i][2])
+            slice.setLabelVisible(True)
+        
+        self.chart.addSeries(series)

@@ -2,11 +2,14 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS products_per_category;;
 CREATE PROCEDURE products_per_category()
 	BEGIN
-		SELECT productcategory.name AS category, COUNT(category_id) AS amount
-		FROM product
-		INNER JOIN productcategory AS cat ON product.category_id = cat.id
-		GROUP BY category_id
-		ORDER BY amount ASC;
+		SELECT pc.name AS category, COUNT(p.category_id) AS amount,
+        (COUNT(p.category_id) * 100 / (SELECT COUNT(p.category_id) FROM product)) AS percentage
+        FROM productcategory AS pc
+        
+         INNER JOIN product AS p
+         WHERE p.category_id = pc.id
+       
+         GROUP BY category, p.category_id;
 	END;;
     
 -- Procedure used for statistical analysis. Returns how many products are in each category

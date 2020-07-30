@@ -1,12 +1,22 @@
 DELIMITER ;;
-DROP PROCEDURE IF EXISTS users_by_gender;;
-CREATE PROCEDURE users_by_gender()
+DROP PROCEDURE IF EXISTS sellers_by_gender;;
+CREATE PROCEDURE sellers_by_gender()
 	BEGIN
-		SELECT gen.name AS gender, COUNT(gender_id) AS amount
-		FROM person
-		INNER JOIN gender AS gen ON person.gender_id = gen.id
-		GROUP BY gender_id
-		ORDER BY amount ASC;
+		SELECT g.name AS name, COUNT(pr.seller_id),
+         (COUNT(pr.seller_id) * 100 / (SELECT COUNT(pr.seller_id) FROM product)) AS percentage
+         FROM gender AS g
+        
+        INNER JOIN person AS p
+        ON p.gender_id = g.id
+        
+        INNER JOIN useraccount AS ua
+        ON p.citizenship_id = ua.person_id
+        
+        INNER JOIN product AS pr
+        ON seller_id = ua.id
+        
+        GROUP BY name, pr.seller_id;
 	END;;
     
 -- Procedure used for statistical analysis. Returns total persons by gender
+call sellers_by_gender();

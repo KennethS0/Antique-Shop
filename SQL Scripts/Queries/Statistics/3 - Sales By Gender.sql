@@ -2,13 +2,22 @@ DELIMITER ;;
 DROP PROCEDURE IF EXISTS sales_by_gender;;
 CREATE PROCEDURE sales_by_gender()
 	BEGIN
-		SELECT gen.name AS gender, COUNT(*) AS sales
-        FROM product 
-			INNER JOIN useraccount AS acc ON product.seller_id = acc.id
-            INNER JOIN person AS per ON acc.person_id = per.citizenship_id
-            INNER JOIN gender AS gen ON per.gender_id = gen.id
-		WHERE product.state = 'sold'
-        GROUP BY gen.name;
+		SELECT ge.name AS Name, COUNT(pr.id) AS Amount,
+        (COUNT(*) * 100 / (SELECT COUNT(*) FROM product)) AS percentage 
+        FROM gender AS ge
+        
+        INNER JOIN person AS P
+        ON ge.id = p.gender_id
+        
+        INNER JOIN useraccount AS ua
+        ON p.citizenship_id = ua.person_id
+        
+        INNER JOIN product as pr
+        ON pr.buyer_id = ua.id
+        
+        GROUP BY Name, pr.id;
 	END;;
     
 -- Procedure used for statistical analysis. Returns total amout of sales per gender
+
+call sales_by_gender();

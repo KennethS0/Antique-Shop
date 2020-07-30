@@ -34,6 +34,16 @@ GET_AREACODE = 'Geography_getAreaCode'
 ###########
 PRODUCT_SEARCH = 'product_search'
 
+
+#################
+# Admin Queries #
+#################
+PRODUCTS_BY_CATEGORY = 'products_per_category'
+SELLERS_BY_GENDER = 'sellers_by_gender'
+SELLERS_BY_AGE = 'sellers_by_age'
+SALES_BY_GENDER = 'sales_by_gender'
+PROFITS_BY_GENDER = 'profit_by_gender'
+
 #########################
 # Data Insertion Module #
 #########################

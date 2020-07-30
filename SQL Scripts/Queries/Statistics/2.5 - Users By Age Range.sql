@@ -1,6 +1,6 @@
 DELIMITER ;;
-DROP PROCEDURE IF EXISTS users_by_age;;
-CREATE PROCEDURE users_by_age()
+DROP PROCEDURE IF EXISTS sellers_by_age;;
+CREATE PROCEDURE sellers_by_age()
 	BEGIN
 		SELECT 
 		CASE 
@@ -10,8 +10,16 @@ CREATE PROCEDURE users_by_age()
 			WHEN (DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(birth_date, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(birth_date, '00-%m-%d'))) <= 50 THEN '50+' 
 		END 
 		AS age,
-		COUNT(*) total
-		FROM person
+		COUNT(*) total,
+		(COUNT(*) * 100 / (SELECT COUNT(*) FROM person)) AS percentage
+		FROM person AS p
+        
+        INNER JOIN useraccount AS ua
+        ON p.citizenship_id = ua.person_id
+        
+        INNER JOIN product AS pr
+        ON pr.seller_id = ua.id
+        
 		GROUP BY age;
 	END;;
 
