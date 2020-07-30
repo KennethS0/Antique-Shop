@@ -28,6 +28,7 @@ GET_DISTRICTS = 'Geography_getDistricts'
 GET_COMMUNITIES = 'Geography_getCommunities'
 GET_NATIONALITIES = 'Geography_getNationalities'
 GET_AREACODE = 'Geography_getAreaCode'
+GET_COMMUNITY_ID = 'Geography_getCommunityId'
 
 ###########
 # Queries #
@@ -82,3 +83,7 @@ PURCHASE_PRODUCTS = 'Product_purchase'
 ###############################
 GET_PHONE_TYPES = 'getPhoneTypes'
 GET_GENDERS = 'getGenders'
+GET_NATIONALITY_ID = 'getNationalityId'
+GET_GENDER_ID = 'getGenderId'
+GET_PHONE_TYPE_ID = 'getPhoneTypeId'
+CHECK_UNIQUE_MOBILE = 'getPhoneTypes'
