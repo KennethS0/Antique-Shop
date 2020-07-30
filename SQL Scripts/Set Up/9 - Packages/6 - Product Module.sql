@@ -82,3 +82,21 @@ CREATE PROCEDURE Product_removeCart (pProductID INT, pUserID INT)
 BEGIN
 	DELETE FROM cart WHERE product_id = pProductID AND user_id = pUserID;
 END;;
+
+/*
+DELIMITER ;;
+-- Purchases a product for a user
+DROP PROCEDURE IF EXISTS Product_purchase;
+CREATE PROCEDURE Product_purchase (pProductID INT, pUserID INT)
+BEGIN
+	DELETE FROM cart WHERE product_id = pProductID AND user_id = pUserID;
+END;;
+*/
+
+-- Adds a product to the products seen by a user
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS Product_addSeen;
+CREATE PROCEDURE Product_addSeen (pProductID INT, pUserID INT)
+BEGIN
+	INSERT INTO seen (product_id, user_id, date_seen) VALUES (pProductID, pUserID, SYSDATE());
+END;;

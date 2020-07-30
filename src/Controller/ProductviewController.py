@@ -35,6 +35,9 @@ class ProductviewController:
             self.view.ui.Product_AddCartButton.clicked.connect(self.addToCart)
             self.view.ui.Product_AddWishlistButton.clicked.connect(self.addToWishlist)
 
+            self.model.query(I.ADD_SEEN, (self.productid, self.model.connectedUser.id))
+            self.model.commit()
+
         except Exception as err:
 
             msg = QtWidgets.QMessageBox()

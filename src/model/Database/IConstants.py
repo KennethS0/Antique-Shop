@@ -73,6 +73,7 @@ ADD_WISHLIST = 'Product_addToWishlist'
 GET_CART = 'Product_getCart'
 GET_WISHLIST = 'Product_getWishlist'
 REMOVE_CART = 'Product_removeCart'
+ADD_SEEN = 'Product_addSeen'
 
 ###############################
 # Personal Information Module #
