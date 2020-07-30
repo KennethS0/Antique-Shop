@@ -2029,7 +2029,7 @@ class Ui_MainWindow(object):
         self.UserEdit_LastnameLabel.setText(_translate("MainWindow", "Last Name"))
         self.UserEdit_SecondlastnameLabel.setText(_translate("MainWindow", "Second Last Name"))
         self.Product_SellerLatestReview.setText(_translate("MainWindow", "Seller Latest Review"))
-        self.Product_ViaLabel.setText(_translate("MainWindow", "Via:"))
+        self.Product_ViaLabel.setText(_translate("MainWindow", "Shipping:"))
         self.Product_AddWishlistButton.setText(_translate("MainWindow", "Add to Wishlist"))
         self.Product_PriceLabel.setText(_translate("MainWindow", "Price:"))
         self.Product_NameLabel.setText(_translate("MainWindow", "Product Name"))

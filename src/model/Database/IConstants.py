@@ -56,6 +56,8 @@ GET_MERCHANDISE = 'Product_getMerchandise'
 GET_CATEGORIES = 'Product_getCategories'
 GET_SHIPMENTS = 'Product_getShipments'
 GET_PRODUCT = 'Product_getProduct'
+ADD_CART = 'Product_addToCart'
+ADD_WISHLIST = 'Product_addToWishlist'
 
 ###############################
 # Personal Information Module #

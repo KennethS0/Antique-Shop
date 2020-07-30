@@ -34,3 +34,19 @@ BEGIN
         INNER JOIN shipment AS ship ON product.shipment_id = ship.id
 	WHERE product.id = pID;
 END;;
+
+-- Adds a product to the cart of the specified user
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS Product_addToCart;
+CREATE PROCEDURE Product_addToCart (pProductID INT, pUserID INT)
+BEGIN
+	INSERT INTO cart (product_id, user_id) VALUES (pProductID, pUserID);
+END;;
+
+-- Adds a product to the wishlist of the specified user
+DELIMITER ;;
+DROP PROCEDURE IF EXISTS Product_addToWishlist;
+CREATE PROCEDURE Product_addToWishlist (pProductID INT, pUserID INT)
+BEGIN
+	INSERT INTO wishlist (product_id, user_id) VALUES (pProductID, pUserID);
+END;;
