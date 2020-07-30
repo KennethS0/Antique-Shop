@@ -24,7 +24,6 @@ class MainWindow:
         self.ui.UserMenu_SellingButton.clicked.connect(self.showSelling)
         self.ui.UserMenu_ReviewsButton.clicked.connect(self.showReviews)
         self.ui.UserMenu_WishlistButton.clicked.connect(self.showWishlist)
-        self.ui.Wishlist_OpenProductButton.clicked.connect(self.showProduct)
         self.ui.UserMenu_ListsButton.clicked.connect(self.showLists)
         self.ui.UserMenu_CartButton.clicked.connect(self.showCart)
         self.ui.UserMenu_Username.clicked.connect(self.showUserEdit)
