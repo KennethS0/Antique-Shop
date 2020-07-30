@@ -245,6 +245,7 @@ class RegisterController:
                        phonetype=phoneTypeId[0][0],
                        areacode=self.areacode[0][0])
 
+            self.model.commit()
             # Clears all the information that was inside
             self.clearAll()
 
